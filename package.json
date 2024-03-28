@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "main.js",
+  "type": "module",
   "scripts": {
-    "test": "jest"
+    "test": "NODE_OPTIONS=\"$NODE_OPTIONS --experimental-vm-modules\" jest"
   },
   "author": "",
   "license": "ISC",
