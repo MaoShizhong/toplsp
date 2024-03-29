@@ -1,3 +1,0 @@
-Fri Mar 29 2024 11:59:20 GMT+0100 (Central European Standard Time): SyntaxError: Unexpected token 's', "sld" is not valid JSON
-1711710110707: SyntaxError: Unexpected token 'h', "hel" is not valid JSON
-2024-03-29T11:03:52.581Z: SyntaxError: Unexpected token 'h', "hel" is not valid JSON
