@@ -20,4 +20,9 @@ describe("Encode properly", () => {
       'Content-Length: 80\r\n\r\n{"nested":[{"world":"Hello"}],"thiskey":23,"another":{"nested":{"object":true}}}',
     );
   });
+
+  test("Encode undefined", () => {
+    expect(encodeMessage(undefined)).toBe("Content-Length: 0\r\n\r\n{}");
+    expect(encodeMessage(null)).toBe("Content-Length: 0\r\n\r\n{}");
+  });
 });
