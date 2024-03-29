@@ -13,6 +13,12 @@ describe("Decode properly", () => {
     expect(result).toEqual({ name: "Joe" });
   });
 
+  test("Decode object without trailing str information", () => {
+    const str = 'Content-Length 14\r\n\r\n{"name":"Joe"}other things goes here';
+    const result = decodeMessage(str);
+    expect(result).toEqual({ name: "Joe" });
+  });
+
   test("Decode complext nested object", () => {
     const str =
       'Content-Length: 78\r\n\r\n{"nested":[{"man":"woman"}],"thiskey":23,"another":{"nested":{"object":true}}}';
