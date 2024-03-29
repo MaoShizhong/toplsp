@@ -2,14 +2,16 @@ import fs from "fs";
 import decodeMessage from "./decoder.js";
 
 process.stdin.on("data", (data) => {
-  const time = newDate().toISOString();
+  const time = new Date().toISOString();
   try {
-    const obj = decodeMessage(data.toString());
+    const msg = decodeMessage(data.toString());
     fs.appendFile("./logger.txt", `${time}: ${data}\n`, () => {});
-    handleMessage(obj);
+    response(msg);
   } catch (e) {
-    fs.appendFile("./error.txt", `${time}: ${e}\n`, () => {});
+    console.error(e);
   }
 });
 
-function handleMessage(obj) {}
+function response(msg) {
+  console.log({ id: msg.id, method: "Do stuff", params: msg.params });
+}
