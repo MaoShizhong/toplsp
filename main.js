@@ -14,15 +14,17 @@ process.stdin.on("data", (data) => {
 });
 
 const initalizeResponse = {
-  capabilities: "",
+  capabilities: {},
   serverInfo: { name: "toplsp", version: "0.03" },
 };
 
 function response(msg) {
   const { method } = msg;
-  console.error(method);
   switch (method) {
     case "initialize":
-      console.log(encodeMessage(initalizeResponse));
+      console.log(encodeMessage({ id: msg.id, result: initalizeResponse }));
+      break;
+    case "initialized":
+      console.error("Success");
   }
 }
