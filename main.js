@@ -1,17 +1,28 @@
 import fs from "fs";
 import decodeMessage from "./decoder.js";
+import encodeMessage from "./encoder.js";
 
 process.stdin.on("data", (data) => {
   const time = new Date().toISOString();
   try {
     const msg = decodeMessage(data.toString());
-    fs.appendFile("./logger.txt", `${time}: ${data}\n`, () => {});
     response(msg);
+    fs.appendFile("./logger.txt", `${time}: ${data}\n`, () => {});
   } catch (e) {
     console.error(e);
   }
 });
 
+const initalizeResponse = {
+  capabilities: "",
+  serverInfo: { name: "toplsp", version: "0.03" },
+};
+
 function response(msg) {
-  console.log({ id: msg.id, method: "Do stuff", params: msg.params });
+  const { method } = msg;
+  console.error(method);
+  switch (method) {
+    case "initialize":
+      console.log(encodeMessage(initalizeResponse));
+  }
 }
