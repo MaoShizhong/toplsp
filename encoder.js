@@ -1,6 +1,6 @@
 export default function encodeMessage(msg) {
-  if (msg == undefined) {
-    throw new Error("Message cannot be undefined or null");
+  if (msg == undefined || msg.length === 0) {
+    return `Content-Length 0`;
   }
   const json = JSON.stringify(msg);
 

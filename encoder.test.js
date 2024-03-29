@@ -27,8 +27,9 @@ describe("Encode properly", () => {
     expect(result).toBe("Content-Length: 2\r\n\r\n{}");
   });
 
-  test("Encode undefined / null throws", () => {
-    expect(() => encodeMessage(undefined)).toThrow();
-    expect(() => encodeMessage(null)).toThrow();
+  test("Encode undefined / null or empty string", () => {
+    expect(encodeMessage("")).toBe("Content-Length 0");
+    expect(encodeMessage(undefined)).toBe("Content-Length 0");
+    expect(encodeMessage(null)).toBe("Content-Length 0");
   });
 });
