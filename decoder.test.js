@@ -29,4 +29,9 @@ describe("Decode properly", () => {
       another: { nested: { object: true } },
     });
   });
+
+  test("Decode did not find correct content length", () => {
+    const str = 'Cent-Length 14\r\n\r\n{"name":"Joe"}other things goes here';
+    expect(() => decodeMessage(str)).toThrow();
+  });
 });
