@@ -35,5 +35,5 @@ function response(msg) {
       break;
   }
 
-  logger(msg.method + "'s State:", JSON.stringify(state));
+  logger(msg.method, JSON.stringify(state));
 }
