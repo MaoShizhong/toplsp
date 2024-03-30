@@ -1,6 +1,7 @@
 import fs from "fs";
 import decodeMessage from "./decoder.js";
 import encodeMessage from "./encoder.js";
+import handleDocumentChangeRequest from "./documentChangeService.js";
 
 process.stdin.on("data", (data) => {
   const time = new Date().toISOString();
@@ -26,7 +27,8 @@ function response(msg) {
     case "initialize":
       console.log(encodeMessage({ id: msg.id, result: initalizeResponse }));
       break;
-    case "initialized":
-      console.error("Success");
+    case "textDocument/didChange":
+      handleDocumentChangeRequest(msg);
+      break;
   }
 }
