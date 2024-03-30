@@ -1,3 +1,3 @@
-export default function handleDocumentChangeRequest(msg) {
-  console.error("Change new msg: ");
+export default function handleDocumentChangeRequest(msg, state) {
+  console.error(state);
 }
