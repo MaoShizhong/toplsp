@@ -1,6 +1,6 @@
 import fs from "fs";
 
-export default function logger(msg) {
+export default function logger(title, msg) {
   const time = new Date().toISOString();
-  fs.writeFile("./logs.txt", `${time}: ${msg}\n`, () => {});
+  fs.appendFile("./logs.txt", `${time}: ${title}\n\t\t${msg}\n`, () => {});
 }

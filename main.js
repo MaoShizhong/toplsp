@@ -9,7 +9,6 @@ process.stdin.on("data", (data) => {
   try {
     const msg = decodeMessage(data.toString());
     response(msg);
-    logger(msg.params.toString());
   } catch (e) {
     console.error(e);
   }
@@ -30,8 +29,8 @@ function response(msg) {
       console.log(response);
       break;
     case "textDocument/didOpen":
-      // state.set(msg.params.textDocument.URI, msg.params.textDocument.text);
-      logger(state.toString());
+      state.set(msg.params.textDocument.uri, msg.params.textDocument.text);
+      logger(msg.method, JSON.stringify(state));
       break;
     case "textDocument/didChange":
       handleDocumentChangeRequest(msg, state);
