@@ -128,3 +128,63 @@
 		[{"text":"ok lets test this ouok change things will happei sdt\n"}]
 2024-03-30T11:16:23.952Z: textDocument/didChange
 		[{"text":"ok lets test this ouok change things will happei sdft\n"}]
+2024-03-30T11:19:12.469Z: textDocument/didOpen
+		{}
+2024-03-30T11:19:14.758Z: textDocument/didChange
+		[{"text":"ok\n"}]
+2024-03-30T11:19:14.907Z: textDocument/didChange
+		[{"text":"ok \n"}]
+2024-03-30T11:19:15.859Z: textDocument/didChange
+		[{"text":"ok n\n"}]
+2024-03-30T11:19:16.007Z: textDocument/didChange
+		[{"text":"ok ne\n"}]
+2024-03-30T11:19:16.156Z: textDocument/didChange
+		[{"text":"ok new\n"}]
+2024-03-30T11:19:16.608Z: textDocument/didChange
+		[{"text":"ok new\n\n"}]
+2024-03-30T11:19:16.948Z: textDocument/didChange
+		[{"text":"ok new\nl\n"}]
+2024-03-30T11:19:17.097Z: textDocument/didChange
+		[{"text":"ok new\nli\n"}]
+2024-03-30T11:19:17.247Z: textDocument/didChange
+		[{"text":"ok new\nline\n"}]
+2024-03-30T11:19:17.664Z: textDocument/didChange
+		[{"text":"ok new\nline\n\n"}]
+2024-03-30T11:19:17.933Z: textDocument/didChange
+		[{"text":"ok new\nline\nl\n"}]
+2024-03-30T11:19:18.087Z: textDocument/didChange
+		[{"text":"ok new\nline\nle\n"}]
+2024-03-30T11:19:18.236Z: textDocument/didChange
+		[{"text":"ok new\nline\nlet\n"}]
+2024-03-30T11:19:18.385Z: textDocument/didChange
+		[{"text":"ok new\nline\nlets \n"}]
+2024-03-30T11:19:18.535Z: textDocument/didChange
+		[{"text":"ok new\nline\nlets g\n"}]
+2024-03-30T11:19:18.684Z: textDocument/didChange
+		[{"text":"ok new\nline\nlets go\n"}]
+2024-03-30T11:19:18.910Z: textDocument/didChange
+		[{"text":"ok new\nline\nlets go?\n"}]
+2024-03-30T11:19:19.512Z: textDocument/didChange
+		[{"text":"ok new\nline\nlets go?\n\n"}]
+2024-03-30T11:19:19.837Z: textDocument/didChange
+		[{"text":"ok new\nline\nlets go?\ni\n"}]
+2024-03-30T11:19:19.987Z: textDocument/didChange
+		[{"text":"ok new\nline\nlets go?\nis\n"}]
+2024-03-30T11:19:20.136Z: textDocument/didChange
+		[{"text":"ok new\nline\nlets go?\nis i\n"}]
+2024-03-30T11:19:20.285Z: textDocument/didChange
+		[{"text":"ok new\nline\nlets go?\nis it \n"}]
+2024-03-30T11:19:20.436Z: textDocument/didChange
+		[{"text":"ok new\nline\nlets go?\nis it ne\n"}]
+2024-03-30T11:19:20.585Z: textDocument/didChange
+		[{"text":"ok new\nline\nlets go?\nis it new \n"}]
+2024-03-30T11:19:20.734Z: textDocument/didChange
+		[{"text":"ok new\nline\nlets go?\nis it new a\n"}]
+2024-03-30T11:19:20.883Z: textDocument/didChange
+		[{"text":"ok new\nline\nlets go?\nis it new ar\n"}]
+2024-03-30T11:19:21.033Z: textDocument/didChange
+		[{"text":"ok new\nline\nlets go?\nis it new arra\n"}]
+2024-03-30T11:19:21.183Z: textDocument/didChange
+		[{"text":"ok new\nline\nlets go?\nis it new array\n"}]
+2024-03-30T11:19:21.340Z: textDocument/didChange
+		[{"text":"ok new\nline\nlets go?\nis it new array?\n"}]
