@@ -14,7 +14,9 @@ process.stdin.on("data", (data) => {
 });
 
 const initalizeResponse = {
-  capabilities: {},
+  capabilities: {
+    textDocumentSync: 1,
+  },
   serverInfo: { name: "toplsp", version: "0.03" },
 };
 
