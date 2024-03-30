@@ -7,7 +7,7 @@ process.stdin.on("data", (data) => {
   try {
     const msg = decodeMessage(data.toString());
     response(msg);
-    fs.appendFile("./logger.txt", `${time}: ${data}\n`, () => {});
+    fs.appendFile("./logger.txt", `${time}: ${msg.method}\n`, () => {});
   } catch (e) {
     console.error(e);
   }
