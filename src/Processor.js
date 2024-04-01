@@ -15,7 +15,7 @@ export default class Proccessor {
     let str = "";
     for (const [key, value] of this.state.entries()) {
       const valueStr = typeof value === "string" ? value : value[0].text;
-      str += `${key}:\n[\n${valueStr}]`;
+      str += `${key}: "${valueStr}"`;
     }
 
     return str;
