@@ -10,4 +10,13 @@ export default class Proccessor {
   getState(key) {
     return this.state.get(key);
   }
+
+  toString() {
+    let str = "";
+    for (const [key, value] of this.state.entries()) {
+      str += `${key}:\n\t${value}`;
+    }
+
+    return str;
+  }
 }
