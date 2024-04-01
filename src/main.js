@@ -1,7 +1,8 @@
 import { decodeMessage, encodeMessage } from "./parser.js";
 import logger from "./logger.js";
+import Proccessor from "./Processor.js";
 
-const state = new Map();
+const proc = new Proccessor();
 
 process.stdin.on("data", (data) => {
   try {
@@ -27,10 +28,13 @@ function response(msg) {
       console.log(response);
       break;
     case "textDocument/didOpen":
-      state.set(msg.params.textDocument.uri, msg.params.textDocument.text);
+      proc.updateState(
+        msg.params.textDocument.uri,
+        msg.params.textDocument.text,
+      );
       break;
     case "textDocument/didChange":
-      state.set(msg.params.textDocument.uri, msg.params.contentChanges);
+      proc.updateState(msg.params.textDocument.uri, msg.params.contentChanges);
       break;
   }
 

@@ -1,4 +1,4 @@
-class Proccessor {
+export default class Proccessor {
   constructor() {
     this.state = new Map();
   }
