@@ -10,6 +10,6 @@ describe("Prints state correctly", () => {
   test("Print arrays correctly", () => {
     const proc = new Processor();
     proc.updateState("work", [{ text: "away from\nthe street" }]);
-    expect(proc.toString()).toBe('home: "away from\the street"');
+    expect(proc.toString()).toBe('work: "away from\nthe street"');
   });
 });
