@@ -38,5 +38,5 @@ function response(msg) {
       break;
   }
 
-  logger(msg.method, JSON.stringify(state));
+  logger(msg.method, proc.toString());
 }
