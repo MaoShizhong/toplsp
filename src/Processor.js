@@ -14,11 +14,8 @@ export default class Proccessor {
   toString() {
     let str = "";
     for (const [key, value] of this.state.entries()) {
-      const valueStr =
-        typeof value === "string"
-          ? `"${value}"`
-          : value.map((str) => `"${str}"`).join(",\n");
-      str += `${key}: [\n${valueStr}\n]`;
+      const valueStr = typeof value === "string" ? value : value[0].text;
+      str += `${key}:\n[\n${valueStr}\n]`;
     }
 
     return str;
