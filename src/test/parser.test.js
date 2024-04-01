@@ -1,4 +1,4 @@
-import { decodeMessage, encodeMessage } from "./parser";
+import { decodeMessage, encodeMessage } from "../parser";
 
 describe("Decode properly", () => {
   test("Decode empty object", () => {

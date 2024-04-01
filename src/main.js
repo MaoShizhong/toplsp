@@ -1,5 +1,4 @@
-import decodeMessage from "./decoder.js";
-import encodeMessage from "./encoder.js";
+import { decodeMessage, encodeMessage } from "./parser.js";
 import logger from "./logger.js";
 
 const state = new Map();

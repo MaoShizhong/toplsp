@@ -188,3 +188,23 @@
 		{}
 2024-04-01T11:05:29.641Z: $/cancelRequest
 		{}
+2024-04-01T11:06:52.779Z: workspace/willRenameFiles
+		{}
+2024-04-01T11:06:53.834Z: $/cancelRequest
+		{}
+2024-04-01T11:06:58.732Z: workspace/willRenameFiles
+		{}
+2024-04-01T11:06:59.779Z: $/cancelRequest
+		{}
+2024-04-01T11:07:00.976Z: workspace/willRenameFiles
+		{}
+2024-04-01T11:07:02.027Z: $/cancelRequest
+		{}
+2024-04-01T11:07:04.136Z: workspace/willRenameFiles
+		{}
+2024-04-01T11:07:05.191Z: $/cancelRequest
+		{}
+2024-04-01T11:07:11.278Z: workspace/willRenameFiles
+		{}
+2024-04-01T11:07:12.331Z: $/cancelRequest
+		{}
