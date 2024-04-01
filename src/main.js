@@ -35,6 +35,7 @@ function response(msg) {
       break;
     case "textDocument/didChange":
       proc.updateState(msg.params.textDocument.uri, msg.params.contentChanges);
+      logger(msg.method, JSON.stringify(msg.param.contentChanges));
       break;
   }
 
