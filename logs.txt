@@ -176,3 +176,15 @@
 		{}
 2024-03-30T11:51:34.501Z: shutdown
 		{}
+2024-04-01T11:02:44.994Z: initialize
+		{}
+2024-04-01T11:02:45.113Z: initialized
+		{}
+2024-04-01T11:04:52.252Z: workspace/willRenameFiles
+		{}
+2024-04-01T11:04:53.298Z: $/cancelRequest
+		{}
+2024-04-01T11:05:28.606Z: workspace/willRenameFiles
+		{}
+2024-04-01T11:05:29.641Z: $/cancelRequest
+		{}
