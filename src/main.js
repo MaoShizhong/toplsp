@@ -2,6 +2,13 @@ import { decodeMessage, encodeMessage } from "./parser.js";
 import logger from "./logger.js";
 import Proccessor from "./Processor.js";
 
+const initalizeResponse = {
+  capabilities: {
+    textDocumentSync: 1,
+  },
+  serverInfo: { name: "toplsp", version: "0.06" },
+};
+
 const proc = new Proccessor();
 
 process.stdin.on("data", (data) => {
@@ -12,13 +19,6 @@ process.stdin.on("data", (data) => {
     console.error(e);
   }
 });
-
-const initalizeResponse = {
-  capabilities: {
-    textDocumentSync: 1,
-  },
-  serverInfo: { name: "toplsp", version: "0.06" },
-};
 
 function response(msg) {
   const { method } = msg;
