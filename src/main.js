@@ -43,7 +43,10 @@ function response(msg) {
       response = encodeMessage({
         id: msg.id,
         result: {
-          contents: "Hello from lsp",
+          contents: proc.getPosition(
+            msg.params.textDocument.uri,
+            msg.params.position,
+          ),
         },
       });
       logger(

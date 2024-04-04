@@ -12,7 +12,8 @@ export default class Proccessor {
   }
 
   getPosition(uri, position) {
-    const text = this.state.get(uri)[0].text;
+    const value = this.state.get(uri);
+    const text = typeof value === "string" ? value : value[0].text;
     return text.split("\n")[position.line];
   }
 
