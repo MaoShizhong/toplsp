@@ -3,19 +3,17 @@ export default class Proccessor {
     this.state = new Map();
   }
 
-  updateState(key, value) {
-    this.state.set(key, value);
+  updateState(uri, text) {
+    this.state.set(uri, text);
   }
 
-  getState(key) {
-    return this.state.get(key);
+  getState(uri) {
+    return this.state.get(uri);
   }
 
-  getPosition(hover) {
-    const { line, character } = hover.position;
-    const text = hover.textDocument;
-
-    return text.split("\n")[line - 1];
+  getPosition(uri, position) {
+    const text = this.state.get(uri)[0].text;
+    return text.split("\n")[position.line];
   }
 
   toString() {

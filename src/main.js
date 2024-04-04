@@ -23,10 +23,10 @@ process.stdin.on("data", (data) => {
 
 function response(msg) {
   const { method } = msg;
+  let response = null;
   switch (method) {
     case "initialize":
-      const response = encodeMessage({ id: msg.id, result: initalizeResponse });
-      console.log(response);
+      response = encodeMessage({ id: msg.id, result: initalizeResponse });
       break;
     case "textDocument/didOpen":
       proc.updateState(
@@ -40,7 +40,17 @@ function response(msg) {
       logger(msg.method, proc.toString());
       break;
     case "textDocument/hover":
-      logger(msg.method, proc.getPosition(msg.position));
+      response = encodeMessage({
+        id: msg.id,
+      });
+      logger(
+        msg.method,
+        proc.getPosition(msg.params.textDocument.uri, msg.params.position),
+      );
       break;
+  }
+
+  if (response != null) {
+    console.log(response);
   }
 }
