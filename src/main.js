@@ -33,11 +33,14 @@ function response(msg) {
         msg.params.textDocument.uri,
         msg.params.textDocument.text,
       );
+      logger(msg.method, proc.toString());
       break;
     case "textDocument/didChange":
       proc.updateState(msg.params.textDocument.uri, msg.params.contentChanges);
+      logger(msg.method, proc.toString());
+      break;
+    case "textDocument/hover":
+      logger(msg.method, JSON.stringify(msg.params.position.position));
       break;
   }
-
-  logger(msg.method, proc.toString());
 }
