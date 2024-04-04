@@ -40,7 +40,7 @@ function response(msg) {
       logger(msg.method, proc.toString());
       break;
     case "textDocument/hover":
-      logger(msg.method, JSON.stringify(msg.params.position.position));
+      logger(msg.method, proc.getPosition(msg.position));
       break;
   }
 }

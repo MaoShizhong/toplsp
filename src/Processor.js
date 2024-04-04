@@ -11,6 +11,13 @@ export default class Proccessor {
     return this.state.get(key);
   }
 
+  getPosition(hover) {
+    const { line, character } = hover.position;
+    const text = hover.textDocument;
+
+    return text.split("\n")[line - 1];
+  }
+
   toString() {
     let str = "";
     for (const [key, value] of this.state.entries()) {
