@@ -42,6 +42,9 @@ function response(msg) {
     case "textDocument/hover":
       response = encodeMessage({
         id: msg.id,
+        result: {
+          contents: "Hello from lsp",
+        },
       });
       logger(
         msg.method,
