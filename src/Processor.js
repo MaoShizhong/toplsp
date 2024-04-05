@@ -5,9 +5,6 @@ export default class Proccessor {
 
   updateState(uri, text) {
     this.state.set(uri, text);
-    console.error("URI: ", uri);
-    console.error("State: ", this.state.get(uri));
-    console.error("Update state called");
   }
 
   getState(uri) {
