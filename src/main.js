@@ -5,6 +5,7 @@ import Proccessor from "./Processor.js";
 const initalizeResponse = {
   capabilities: {
     textDocumentSync: 1,
+    openClose: true,
     hoverProvider: true,
   },
   serverInfo: { name: "toplsp", version: "0.06" },

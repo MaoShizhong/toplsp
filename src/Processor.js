@@ -5,6 +5,9 @@ export default class Proccessor {
 
   updateState(uri, text) {
     this.state.set(uri, text);
+    console.error("URI: ", uri);
+    console.error("State: ", this.state.get(uri));
+    console.error("Update state called");
   }
 
   getState(uri) {
@@ -12,6 +15,9 @@ export default class Proccessor {
   }
 
   getPosition(uri, position) {
+    console.error("URI: ", uri);
+    console.error("Position: ", position);
+    console.error("State: ", this.state.get(uri));
     return this.state.get(uri).split("\n")[position.line];
   }
 
