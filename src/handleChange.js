@@ -1,3 +1,5 @@
+import logger from "./logger.js";
+
 export default function handleChange(state, msg) {
   const uri = msg.params.textDocument.uri;
   const content = msg.params.contentChanges[0].text;

@@ -1,4 +1,5 @@
 import { encodeMessage } from "./parser.js";
+import logger from "./logger.js";
 
 const initalizeResponse = {
   capabilities: {

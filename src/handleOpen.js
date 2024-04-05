@@ -1,3 +1,5 @@
+import logger from "./logger.js";
+
 export default function handleOpen(state, msg) {
   const uri = msg.params.textDocument.uri;
   const content = msg.params.textDocument.text;
