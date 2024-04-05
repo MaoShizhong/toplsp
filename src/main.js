@@ -1,6 +1,5 @@
 import { decodeMessage, encodeMessage } from "./parser.js";
 import logger from "./logger.js";
-import Proccessor from "./Processor.js";
 
 const initalizeResponse = {
   capabilities: {
@@ -27,6 +26,9 @@ function response(msg) {
     case "initialize":
       handleInitalization(msg);
       break;
+    case "initalized":
+      logger(msg.method, "Inetalized Succeeded");
+      break;
     case "textDocument/didOpen":
       handleOpen(state, msg);
       break;
@@ -42,6 +44,7 @@ function response(msg) {
 function handleInitalization(msg) {
   const response = encodeMessage({ id: msg.id, result: initalizeResponse });
   console.log(response);
+  logger(msg.method, "Initalization requested");
 }
 
 function handleOpen(state, msg) {
@@ -49,7 +52,7 @@ function handleOpen(state, msg) {
   const content = msg.params.textDocument.text;
 
   state.set(uri, content);
-  logger(msg.method, msg.params.textDocument.uri, msg.params.textDocument.text);
+  logger(msg.method + " => " + uri, content);
 }
 
 function handleChange(state, msg) {
@@ -57,15 +60,15 @@ function handleChange(state, msg) {
   const content = msg.params.contentChanges[0].text;
 
   state.set(uri, content);
-  logger(msg.method, msg.params.textDocument.uri, text);
+  logger(msg.method + " => " + uri, content);
 }
 
 function handleHover(state, msg) {
   const uri = msg.params.textDocument.uri;
-  const lineNumber = msg.params.position.line;
+  const { line, character } = msg.params.position;
 
   const content = state.get(uri) ?? "";
-  const contents = content.split("\n")[lineNumber];
+  const contents = content.split("\n")[line];
   const response = encodeMessage({
     id: msg.id,
     result: {
@@ -74,5 +77,5 @@ function handleHover(state, msg) {
   });
   console.log(response);
 
-  logger(msg.method, uri, msg.params.position);
+  logger(msg.method + " => " + uri, `line: ${line}, char: ${character}`);
 }
