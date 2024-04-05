@@ -1,13 +1,9 @@
-import { decodeMessage, encodeMessage } from "./parser.js";
+import { decodeMessage } from "./parser.js";
 import logger from "./logger.js";
-
-const initalizeResponse = {
-  capabilities: {
-    textDocumentSync: 1,
-    hoverProvider: true,
-  },
-  serverInfo: { name: "toplsp", version: "0.06" },
-};
+import handleInitalization from "./handleInitalization.js";
+import handleOpen from "./handleOpen.js";
+import handleChange from "./handleChange.js";
+import handleHover from "./handleHover.js";
 
 const state = new Map();
 
@@ -39,43 +35,4 @@ function response(msg) {
       handleHover(state, msg);
       break;
   }
-}
-
-function handleInitalization(msg) {
-  const response = encodeMessage({ id: msg.id, result: initalizeResponse });
-  console.log(response);
-  logger(msg.method, "Initalization requested");
-}
-
-function handleOpen(state, msg) {
-  const uri = msg.params.textDocument.uri;
-  const content = msg.params.textDocument.text;
-
-  state.set(uri, content);
-  logger(msg.method + " => " + uri, content);
-}
-
-function handleChange(state, msg) {
-  const uri = msg.params.textDocument.uri;
-  const content = msg.params.contentChanges[0].text;
-
-  state.set(uri, content);
-  logger(msg.method + " => " + uri, content);
-}
-
-function handleHover(state, msg) {
-  const uri = msg.params.textDocument.uri;
-  const { line, character } = msg.params.position;
-
-  const content = state.get(uri) ?? "";
-  const contents = content.split("\n")[line];
-  const response = encodeMessage({
-    id: msg.id,
-    result: {
-      contents,
-    },
-  });
-  console.log(response);
-
-  logger(msg.method + " => " + uri, `line: ${line}, char: ${character}`);
 }
