@@ -3,7 +3,7 @@ import logger from "./logger.js";
 
 const initalizeResponse = {
   capabilities: {
-    textDocumentSync: { openClose: true, change: 1 },
+    textDocumentSync: 1,
     hoverProvider: true,
   },
   serverInfo: { name: "toplsp", version: "0.06" },
