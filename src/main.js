@@ -23,10 +23,9 @@ process.stdin.on("data", (data) => {
 
 function response(msg) {
   const { method } = msg;
-  let response = null;
   switch (method) {
     case "initialize":
-      response = encodeMessage({ id: msg.id, result: initalizeResponse });
+      handleInitalization(msg);
       break;
     case "textDocument/didOpen":
       handleOpen(msg);
@@ -35,25 +34,14 @@ function response(msg) {
       handleChange(msg);
       break;
     case "textDocument/hover":
-      response = encodeMessage({
-        id: msg.id,
-        result: {
-          contents: proc.getPosition(
-            msg.params.textDocument.uri,
-            msg.params.position,
-          ),
-        },
-      });
-      logger(
-        msg.method,
-        proc.getPosition(msg.params.textDocument.uri, msg.params.position),
-      );
+      handleHover(msg);
       break;
   }
+}
 
-  if (response != null) {
-    console.log(response);
-  }
+function handleInitalization(msg) {
+  const response = encodeMessage({ id: msg.id, result: initalizeResponse });
+  console.log(response);
 }
 
 function handleOpen(msg) {
@@ -67,4 +55,22 @@ function handleChange(msg) {
     msg.params.contentChanges[0].text,
   );
   logger(msg.method, proc.toString());
+}
+
+function handleHover(msg) {
+  const response = encodeMessage({
+    id: msg.id,
+    result: {
+      contents: proc.getPosition(
+        msg.params.textDocument.uri,
+        msg.params.position,
+      ),
+    },
+  });
+  console.log(response);
+
+  logger(
+    msg.method,
+    proc.getPosition(msg.params.textDocument.uri, msg.params.position),
+  );
 }
