@@ -45,18 +45,27 @@ function handleInitalization(msg) {
 }
 
 function handleOpen(state, msg) {
-  state.set(msg.params.textDocument.uri, msg.params.textDocument.text);
-  logger(msg.method, msg.params.textDocument.text);
+  const uri = msg.params.textDocument.uri;
+  const content = msg.params.textDocument.text;
+
+  state.set(uri, content);
+  logger(msg.method, msg.params.textDocument.uri, msg.params.textDocument.text);
 }
 
 function handleChange(state, msg) {
-  state.set(msg.params.textDocument.uri, msg.params.contentChanges[0].text);
-  logger(msg.method, msg.params.contentChanges[0].text);
+  const uri = msg.params.textDocument.uri;
+  const content = msg.params.contentChanges[0].text;
+
+  state.set(uri, content);
+  logger(msg.method, msg.params.textDocument.uri, text);
 }
 
 function handleHover(state, msg) {
-  const text = state.get(msg.params.textDocument.uri) ?? "";
-  const contents = text.split("\n")[msg.params.position.line];
+  const uri = msg.params.textDocument.uri;
+  const lineNumber = msg.params.position.line;
+
+  const content = state.get(uri) ?? "";
+  const contents = content.split("\n")[lineNumber];
   const response = encodeMessage({
     id: msg.id,
     result: {
@@ -65,8 +74,5 @@ function handleHover(state, msg) {
   });
   console.log(response);
 
-  logger(
-    msg.method,
-    proc.getPosition(msg.params.textDocument.uri, msg.params.position),
-  );
+  logger(msg.method, uri, msg.params.position);
 }
