@@ -29,15 +29,10 @@ function response(msg) {
       response = encodeMessage({ id: msg.id, result: initalizeResponse });
       break;
     case "textDocument/didOpen":
-      proc.updateState(
-        msg.params.textDocument.uri,
-        msg.params.textDocument.text,
-      );
-      logger(msg.method, proc.toString());
+      handleOpen(msg);
       break;
     case "textDocument/didChange":
-      proc.updateState(msg.params.textDocument.uri, msg.params.contentChanges);
-      logger(msg.method, proc.toString());
+      handleChange(msg);
       break;
     case "textDocument/hover":
       response = encodeMessage({
@@ -59,4 +54,17 @@ function response(msg) {
   if (response != null) {
     console.log(response);
   }
+}
+
+function handleOpen(msg) {
+  proc.updateState(msg.params.textDocument.uri, msg.params.textDocument.text);
+  logger(msg.method, proc.toString());
+}
+
+function handleChange(msg) {
+  proc.updateState(
+    msg.params.textDocument.uri,
+    msg.params.contentChanges[0].text,
+  );
+  logger(msg.method, proc.toString());
 }

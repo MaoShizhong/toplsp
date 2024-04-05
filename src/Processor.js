@@ -12,16 +12,13 @@ export default class Proccessor {
   }
 
   getPosition(uri, position) {
-    const value = this.state.get(uri);
-    const text = typeof value === "string" ? value : value[0].text;
-    return text.split("\n")[position.line];
+    return this.state.get(uri).split("\n")[position.line];
   }
 
   toString() {
     let str = "";
     for (const [key, value] of this.state.entries()) {
-      const valueStr = typeof value === "string" ? value : value[0].text;
-      str += `${key}: "${valueStr}"`;
+      str += `${key}: "${value}"`;
     }
 
     return str;
