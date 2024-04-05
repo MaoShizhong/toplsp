@@ -26,8 +26,8 @@ function response(msg) {
     case "initialize":
       handleInitalization(msg);
       break;
-    case "initalized":
-      logger(msg.method, "Inetalized Succeeded");
+    case "initialized":
+      logger(method, "Inetalized Succeeded");
       break;
     case "textDocument/didOpen":
       handleOpen(state, msg);
