@@ -1,4 +1,4 @@
-import { encodeMessage } from "./parser";
+import { encodeMessage } from "./parser.js";
 
 const initalizeResponse = {
   capabilities: {

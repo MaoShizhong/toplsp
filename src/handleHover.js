@@ -1,4 +1,4 @@
-import { encodeMessage } from "./parser";
+import { encodeMessage } from "./parser.js";
 
 export default function handleHover(state, msg) {
   const uri = msg.params.textDocument.uri;
