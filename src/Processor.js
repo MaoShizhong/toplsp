@@ -19,11 +19,11 @@ export default class Proccessor {
   }
 
   toString() {
-    let str = "";
+    let strs = [];
     for (const [key, value] of this.state.entries()) {
-      str += `${key}: "${value}"\n`;
+      strs.push(`${key}: "${value}"`);
     }
 
-    return str;
+    return strs.join("\n");
   }
 }
