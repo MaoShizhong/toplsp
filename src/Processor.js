@@ -1,7 +1,5 @@
 export default class Proccessor {
-  constructor() {
-    this.state = new Map();
-  }
+  constructor() {}
 
   updateState(uri, text) {
     this.state.set(uri, text);
@@ -11,9 +9,7 @@ export default class Proccessor {
     return this.state.get(uri);
   }
 
-  getPosition(uri, position) {
-    return this.state.get(uri).split("\n")[position.line];
-  }
+  getPosition(uri, position) {}
 
   toString() {
     let strs = [];

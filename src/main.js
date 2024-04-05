@@ -10,7 +10,7 @@ const initalizeResponse = {
   serverInfo: { name: "toplsp", version: "0.06" },
 };
 
-const proc = new Proccessor();
+const state = new Map();
 
 process.stdin.on("data", (data) => {
   try {
@@ -28,13 +28,13 @@ function response(msg) {
       handleInitalization(msg);
       break;
     case "textDocument/didOpen":
-      handleOpen(msg);
+      handleOpen(state, msg);
       break;
     case "textDocument/didChange":
-      handleChange(msg);
+      handleChange(state, msg);
       break;
     case "textDocument/hover":
-      handleHover(msg);
+      handleHover(state, msg);
       break;
   }
 }
@@ -44,27 +44,23 @@ function handleInitalization(msg) {
   console.log(response);
 }
 
-function handleOpen(msg) {
-  proc.updateState(msg.params.textDocument.uri, msg.params.textDocument.text);
-  logger(msg.method, proc.toString());
+function handleOpen(state, msg) {
+  state.set(msg.params.textDocument.uri, msg.params.textDocument.text);
+  logger(msg.method, msg.params.textDocument.text);
 }
 
-function handleChange(msg) {
-  proc.updateState(
-    msg.params.textDocument.uri,
-    msg.params.contentChanges[0].text,
-  );
-  logger(msg.method, proc.toString());
+function handleChange(state, msg) {
+  state.set(msg.params.textDocument.uri, msg.params.contentChanges[0].text);
+  logger(msg.method, msg.params.contentChanges[0].text);
 }
 
-function handleHover(msg) {
+function handleHover(state, msg) {
+  const text = state.get(msg.params.textDocument.uri) ?? "";
+  const contents = text.split("\n")[msg.params.position.line];
   const response = encodeMessage({
     id: msg.id,
     result: {
-      contents: proc.getPosition(
-        msg.params.textDocument.uri,
-        msg.params.position,
-      ),
+      contents,
     },
   });
   console.log(response);
