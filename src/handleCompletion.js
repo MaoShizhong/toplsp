@@ -13,7 +13,7 @@ const completionItmes = [
     label: "Warning Tag",
     detail: "Insert a warning",
     sortText: "warning",
-    filterText: '<div class="lesson-note--warning" markdown="1">',
+    filterText: '<div class="lesson-note lesson-note--warning" markdown="1">',
     insertText:
       '<div class="lesson-note lesson-note--warning" markdown="1">\n</div>',
   },
@@ -21,7 +21,7 @@ const completionItmes = [
     label: "Tip Tag",
     detail: "Insert a tip",
     sortText: "tip",
-    filterText: '<div class="lesson-note--tip" markdown="1">',
+    filterText: '<div class="lesson-note lesson-note--tip" markdown="1">',
     insertText:
       '<div class="lesson-note lesson-note--tip" markdown="1">\n</div>',
   },
