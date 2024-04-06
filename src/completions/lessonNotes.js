@@ -7,7 +7,8 @@ export default [
     detail: "Insert a Note",
     sortText: "note",
     filterText: '<div class="lesson-note" markdown="1">',
-    insertText: '<div class="lesson-note" markdown="1">\n</div>',
+    insertTextFormat: 2,
+    insertText: '<div class="lesson-note" markdown="1">\n$0\n</div>',
   },
   {
     kind,
@@ -15,8 +16,9 @@ export default [
     detail: "Insert a warning",
     sortText: "warning",
     filterText: '<div class="lesson-note lesson-note--warning" markdown="1">',
+    insertTextFormat: 2,
     insertText:
-      '<div class="lesson-note lesson-note--warning" markdown="1">\n</div>',
+      '<div class="lesson-note lesson-note--warning" markdown="1">\n$0\n</div>',
   },
   {
     kind,
@@ -24,7 +26,8 @@ export default [
     detail: "Insert a tip",
     sortText: "tip",
     filterText: '<div class="lesson-note lesson-note--tip" markdown="1">',
+    insertTextFormat: 2,
     insertText:
-      '<div class="lesson-note lesson-note--tip" markdown="1">\n</div>',
+      '<div class="lesson-note lesson-note--tip" markdown="1">\n$0\n</div>',
   },
 ];
