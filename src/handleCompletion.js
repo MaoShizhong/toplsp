@@ -3,9 +3,11 @@ import { encodeMessage } from "./parser.js";
 
 const completionItmes = [
   {
-    label: "Warning",
+    label: "Warning Tag",
     detail: "Insert a warning tag",
-    filterText: "<div",
+    sortText: '<div class="lesson-note" markdown="1">',
+    filterText: '<div class="lesson-note" markdown="1">',
+    insertText: '<div class="lesson-note" markdown="1">\n</div>',
   },
 ];
 
