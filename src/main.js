@@ -4,6 +4,7 @@ import handleInitalization from "./handleInitalization.js";
 import handleOpen from "./handleOpen.js";
 import handleChange from "./handleChange.js";
 import handleHover from "./handleHover.js";
+import handleCompletion from "./handleCompletion.js";
 
 const state = new Map();
 
@@ -35,7 +36,7 @@ function response(msg) {
       handleHover(state, msg);
       break;
     case "textDocument/completion":
-      logger(msg.method, "Completion requested");
+      handleCompletion(msg);
       break;
   }
 }

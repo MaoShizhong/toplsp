@@ -10,7 +10,7 @@ const initalizeResponse = {
   serverInfo: { name: "toplsp", version: "0.06" },
 };
 
-export default function handleInitalization(msg) {
+export default function (msg) {
   const response = encodeMessage({ id: msg.id, result: initalizeResponse });
   console.log(response);
   logger(msg.method, "Initalization requested");
