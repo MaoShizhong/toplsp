@@ -8,7 +8,8 @@ export default [
     sortText: "note",
     filterText: '<div class="lesson-note" markdown="1">',
     insertTextFormat: 2,
-    insertText: '<div class="lesson-note" markdown="1">\n$0\n</div>',
+    insertText:
+      '<div class="lesson-note" markdown="1">\n#### ${1:Optional title}\n</div>',
   },
   {
     kind,
