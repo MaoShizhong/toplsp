@@ -34,5 +34,8 @@ function response(msg) {
     case "textDocument/hover":
       handleHover(state, msg);
       break;
+    case "textDocument/completion":
+      logger(msg.method, "Completion requested");
+      break;
   }
 }
