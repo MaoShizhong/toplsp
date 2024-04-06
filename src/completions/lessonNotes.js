@@ -10,7 +10,7 @@ export default [
     filterText: '<div class="lesson-note" markdown="1">',
     insertTextFormat,
     insertText:
-      '<div class="lesson-note" markdown="1">\n\t#### ${1:Optional title}\t$0\n</div>',
+      '<div class="lesson-note markdown="1">\n\n\t#### ${1:Optional title}\n\n\t${2:Details goes here}\n\n</div>',
   },
   {
     kind,
@@ -20,7 +20,7 @@ export default [
     filterText: '<div class="lesson-note lesson-note--warning" markdown="1">',
     insertTextFormat,
     insertText:
-      '<div class="lesson-note lesson-note--warning" markdown="1">\n\n\t#### ${1:Optional title}${2:\n}\n$0</div>',
+      '<div class="lesson-note lesson-note--warning" markdown="1">\n\n\t#### ${1:Optional title}\n\n\t${2:Details goes here}\n\n</div>',
   },
   {
     kind,
@@ -30,6 +30,6 @@ export default [
     filterText: '<div class="lesson-note lesson-note--tip" markdown="1">',
     insertTextFormat,
     insertText:
-      '<div class="lesson-note lesson-note--tip" markdown="1">\n\t#### ${1:Optional title}$0\n</div>',
+      '<div class="lesson-note lesson-note--tip" markdown="1">\n\n\t#### ${1:Optional title}\n\n\t${2:Details goes here}\n\n</div>',
   },
 ];
