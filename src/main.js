@@ -37,8 +37,5 @@ function response(msg) {
     case "textDocument/completion":
       logger(msg.method, "Completion requested");
       break;
-    default:
-      logger(msg.method, "Default");
-      break;
   }
 }
