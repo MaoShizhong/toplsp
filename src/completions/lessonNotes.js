@@ -1,5 +1,8 @@
+const kind = 15;
+
 export default [
   {
+    kind,
     label: "Note Tag",
     detail: "Insert a Note",
     sortText: "note",
@@ -7,6 +10,7 @@ export default [
     insertText: '<div class="lesson-note" markdown="1">\n</div>',
   },
   {
+    kind,
     label: "Warning Tag",
     detail: "Insert a warning",
     sortText: "warning",
@@ -15,6 +19,7 @@ export default [
       '<div class="lesson-note lesson-note--warning" markdown="1">\n</div>',
   },
   {
+    kind,
     label: "Tip Tag",
     detail: "Insert a tip",
     sortText: "tip",
