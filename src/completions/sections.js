@@ -10,7 +10,7 @@ export default [
     filterText: "### Assignment",
     insertTextFormat,
     insertText:
-      '### Assignment\n\n<div class="lesson-content__panel" markdown="1">\n\n\t#### ${1:Optional heading}\n\n\t1. ${2:List item}\n\t\t- ${3:Instruction}\n\n</div>',
+      '### Assignment\n\n<div class="lesson-content__panel" markdown="1">\n\n\t#### ${1:Optional heading}\n\n\t1. ${2:List item}\n\t\t- ${3:Instruction}\n\n</div>\n\n$0',
   },
   {
     kind,
@@ -19,7 +19,7 @@ export default [
     sortText: "Introduction",
     filterText: "### Introduction",
     insertTextFormat,
-    insertText: "### Introduction\n\n\t${1:A Brief Introduction.}\n\n",
+    insertText: "### Introduction\n\n\t${1:A Brief Introduction.}\n\n$0",
   },
   {
     kind,
@@ -29,6 +29,6 @@ export default [
     filterText: "### Lesson Overview",
     insertTextFormat,
     insertText:
-      "### Lesson Overview\n\n\tThis section contains a general overview of topics that you will learn in this lesson.\n\n\t- ${1:Lesson overview item}\n\n",
+      "### Lesson Overview\n\n\tThis section contains a general overview of topics that you will learn in this lesson.\n\n\t- ${1:Lesson overview item}\n\n$0",
   },
 ];
