@@ -1,2 +1,3 @@
+import assignment from "./assignment.js";
 import lessonNotes from "./lessonNotes.js";
-export default [...lessonNotes];
+export default [...lessonNotes, ...assignment];
