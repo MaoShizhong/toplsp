@@ -29,6 +29,7 @@ function response(msg) {
       break;
     case "textDocument/didOpen":
       handleOpen(state, msg);
+      handleDiagnostics(state, msg);
       break;
     case "textDocument/didChange":
       handleChange(state, msg);
