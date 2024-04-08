@@ -5,7 +5,10 @@ export default function (state, msg) {
   const uri = msg.params.textDocument.uri;
   const diagnostics = parseDiagnostics(state.get(uri));
 
-  const response = encodeMessage({ id: msg.id, uri: msg, diagnostics });
+  const response = encodeMessage({
+    method: "textDocument/publishDiagnostics",
+    params: { uri, diagnostics },
+  });
   console.log(response);
   logger(msg.method, "Handling diagnostics");
 }
