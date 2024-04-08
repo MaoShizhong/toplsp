@@ -38,5 +38,8 @@ function response(msg) {
     case "textDocument/completion":
       handleCompletion(msg);
       break;
+    case "textDocument/diagnostic":
+      handleDiagnostics(state, msg);
+      break;
   }
 }
