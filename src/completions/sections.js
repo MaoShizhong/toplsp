@@ -41,4 +41,14 @@ export default [
     insertText:
       "### Knowledge check\n\n\tThe following questions are an opportunity to reflect on key topics in this lesson. If you can't answer a question, click on it to review the material, but keep in mind you are not expected to memorize or master this knowledge.\n\n\t- [${1:A knowledge check question}](${2:a-knowledge-check-url})\n\n$0",
   },
+  {
+    kind,
+    label: "Additional resources section",
+    detail: "Insert additional resources section",
+    sortText: "Additional resources",
+    filterText: "### Additional resources",
+    insertTextFormat,
+    insertText:
+      "### Additional resources\n\n\tThis section contains helpful links to related content. It isn't required, so consider it supplemental.\n\n\t- ${1:It looks like this lesson doesn't have any additional resources yet. Help us expand this section by contributing to our curriculum.}\n\n",
+  },
 ];
