@@ -49,6 +49,6 @@ export default [
     filterText: "### Additional resources",
     insertTextFormat,
     insertText:
-      "### Additional resources\n\n\tThis section contains helpful links to related content. It isn't required, so consider it supplemental.\n\n\t- ${1:It looks like this lesson doesn't have any additional resources yet. Help us expand this section by contributing to our curriculum.}\n\n",
+      "### Additional resources\n\n\tThis section contains helpful links to related content. It isn't required, so consider it supplemental.\n\n\t- ${1:It looks like this lesson doesn't have any additional resources yet. Help us expand this section by contributing to our curriculum.}\n",
   },
 ];
