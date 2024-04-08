@@ -4,7 +4,7 @@ const insertTextFormat = 2; // Format Snippet
 export default [
   {
     kind,
-    label: "Assignment Section",
+    label: "Assignment section",
     detail: "Insert assignment section",
     sortText: "Assignment",
     filterText: "### Assignment",
@@ -14,7 +14,7 @@ export default [
   },
   {
     kind,
-    label: "Introduction Section",
+    label: "Introduction section",
     detail: "Insert introduction section",
     sortText: "Introduction",
     filterText: "### Introduction",
@@ -23,12 +23,22 @@ export default [
   },
   {
     kind,
-    label: "Lesson overview Section",
-    detail: "Lesson overview section",
+    label: "Lesson overview section",
+    detail: "Insert lesson overview section",
     sortText: "Lesson Overview",
     filterText: "### Lesson Overview",
     insertTextFormat,
     insertText:
       "### Lesson Overview\n\n\tThis section contains a general overview of topics that you will learn in this lesson.\n\n\t- ${1:Lesson overview item}\n\n$0",
+  },
+  {
+    kind,
+    label: "Knowledge check section",
+    detail: "Insert lesson overview section",
+    sortText: "Knowledge Check",
+    filterText: "### Knowledge check",
+    insertTextFormat,
+    insertText:
+      "### Knowledge check\n\n\tThe following questions are an opportunity to reflect on key topics in this lesson. If you can't answer a question, click on it to review the material, but keep in mind you are not expected to memorize or master this knowledge.\n\n\t- [${1:A knowledge check question}](${2:a-knowledge-check-url})\n\n$0",
   },
 ];
