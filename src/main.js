@@ -5,6 +5,7 @@ import handleOpen from "./handleOpen.js";
 import handleChange from "./handleChange.js";
 import handleHover from "./handleHover.js";
 import handleCompletion from "./handleCompletion.js";
+import handleDiagnostics from "./handleDiagnostic.js";
 
 const state = new Map();
 

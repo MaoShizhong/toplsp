@@ -6,7 +6,10 @@ const initalizeResponse = {
     textDocumentSync: 1,
     hoverProvider: true,
     completionProvider: {},
-    diagnosticProvider,
+    diagnosticProvider: {
+      interFileDependencies: false,
+      workspaceDiagnostics: true,
+    },
   },
   serverInfo: { name: "toplsp", version: "0.06" },
 };
