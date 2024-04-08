@@ -39,7 +39,7 @@ function response(msg) {
     case "textDocument/completion":
       handleCompletion(msg);
       break;
-    case "textDocument/diagnostic":
+    case "textDocument/didSave":
       handleDiagnostics(state, msg);
       break;
   }
