@@ -10,7 +10,7 @@ export default [
     filterText: "### Assignment",
     insertTextFormat,
     insertText:
-      '### Assignment\n\n<div class="lesson-content__panel" markdown="1">\n\n#### ${1:Optional heading}\n\n1. ${2:List item}\n\t- ${3:Instruction}\n\nt#### ${4:Extra credit}\n\n- ${5:An optional add-on}\n\n</div>\n\n$0',
+      '### Assignment\n\n<div class="lesson-content__panel" markdown="1">\n\n#### ${1:Optional heading}\n\n1. ${2:List item}\n\t- ${3:Instruction}\n\n#### ${4:Extra credit}\n\n- ${5:An optional add-on}\n\n</div>\n\n$0',
   },
   {
     kind,
