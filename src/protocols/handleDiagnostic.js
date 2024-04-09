@@ -1,4 +1,3 @@
-import logger from "../logger.js";
 import { encodeMessage } from "../parser.js";
 
 export default function (state, msg) {
@@ -10,7 +9,6 @@ export default function (state, msg) {
     params: { uri, diagnostics },
   });
   console.log(response);
-  logger(msg.method, "Handling diagnostics");
 }
 
 function parseDiagnostics(text) {

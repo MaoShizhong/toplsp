@@ -1,5 +1,4 @@
-import { encodeMessage } from "./parser.js";
-import logger from "./logger.js";
+import { encodeMessage } from "../parser.js";
 
 export default function (state, msg) {
   const uri = msg.params.textDocument.uri;
@@ -14,6 +13,4 @@ export default function (state, msg) {
     },
   });
   console.log(response);
-
-  logger(msg.method + " => " + uri, `line: ${line}, char: ${character}`);
 }

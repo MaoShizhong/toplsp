@@ -1,5 +1,4 @@
-import { encodeMessage } from "./parser.js";
-import logger from "./logger.js";
+import { encodeMessage } from "../parser.js";
 
 const initalizeResponse = {
   capabilities: {
@@ -13,5 +12,4 @@ const initalizeResponse = {
 export default function (msg) {
   const response = encodeMessage({ id: msg.id, result: initalizeResponse });
   console.log(response);
-  logger(msg.method, "Initalization requested");
 }
