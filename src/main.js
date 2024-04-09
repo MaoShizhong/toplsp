@@ -1,11 +1,11 @@
 import { decodeMessage } from "./parser.js";
 import logger from "./logger.js";
-import handleInitalization from "./handleInitalization.js";
-import handleOpen from "./handleOpen.js";
-import handleChange from "./handleChange.js";
-import handleHover from "./handleHover.js";
-import handleCompletion from "./handleCompletion.js";
-import handleDiagnostics from "./handleDiagnostic.js";
+import handleInitalization from "./protocols/handleInitalization.js/index.js";
+import handleOpen from "./protocols/handleOpen.js/index.js";
+import handleChange from "./protocols/handleChange.js/index.js";
+import handleHover from "./protocols/handleHover.js/index.js";
+import handleCompletion from "./protocols/handleCompletion.js/index.js";
+import handleDiagnostics from "./protocols/handleDiagnostic.js";
 
 const state = new Map();
 
