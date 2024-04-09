@@ -1,31 +1,34 @@
 export default class Protocol {
-  #state;
   #analyzer;
   #encoder;
 
   constructor(analyzer, encoder) {
     this.#analyzer = analyzer;
     this.#encoder = encoder;
-    this.#state = new Map();
+  }
+
+  handleOpen(msg) {
+    const uri = msg.params.textDocument.uri;
+    const content = msg.params.textDocument.text;
+
+    this.#analyzer.updateState(uri, content);
+    this.#diagnosticsResponse(msg);
   }
 
   handleChange(msg) {
     const uri = msg.params.textDocument.uri;
     const content = msg.params.contentChanges[0].text;
 
-    this.#state.set(uri, content);
+    this.#analyzer.updateState(uri, content);
   }
 
-  handleCompletion(msg) {
-    const response = this.#encoder.encode({ id: msg.id, result: completions });
-
-    console.log(response);
+  handleSave(msg) {
+    this.#diagnosticsResponse(msg);
   }
 
-  handleDiagnostics(msg) {
+  #diagnosticsResponse(msg) {
     const uri = msg.params.textDocument.uri;
-    const diagnostics = this.#analyzer.generateDiagnostics(this.#state);
-
+    const diagnostics = this.#analyzer.generateDiagnostics();
     const response = this.#encoder.encode({
       method: "textDocument/publishDiagnostics",
       params: { uri, diagnostics },
@@ -34,11 +37,16 @@ export default class Protocol {
     console.log(response);
   }
 
+  handleCompletion(msg) {
+    const response = this.#encoder.encode({ id: msg.id, result: completions });
+    console.log(response);
+  }
+
   handleHover(msg) {
     const uri = msg.params.textDocument.uri;
     const { line } = msg.params.position;
 
-    const content = this.#state.get(uri) ?? "";
+    const content = this.#analyzer.getContent(uri);
     const contents = content.split("\n")[line];
     const response = encodeMessage({
       id: msg.id,
@@ -66,12 +74,5 @@ export default class Protocol {
     });
 
     console.log(response);
-  }
-
-  handleOpen(msg) {
-    const uri = msg.params.textDocument.uri;
-    const content = msg.params.textDocument.text;
-
-    this.#state.set(uri, content);
   }
 }

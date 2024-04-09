@@ -1,8 +1,9 @@
+import Analyzer from "./Analyzer.js";
 import Encoder from "./Encoder.js";
 import Protocol from "./protocols/Protocol.js";
 
 const encoder = new Encoder();
-const analyzer = undefined;
+const analyzer = new Analyzer();
 const protocol = new Protocol(analyzer, encoder);
 
 process.stdin.on("data", (data) => {
@@ -21,8 +22,7 @@ function response(msg) {
       protocol.handleInitalization(msg);
       break;
     case "textDocument/didOpen":
-      protocol.updateState(msg);
-      protocol.handleDiagnostics(msg);
+      protocol.handleOpen(msg);
       break;
     case "textDocument/didChange":
       protocol.updateState(msg);
@@ -34,7 +34,7 @@ function response(msg) {
       protocol.handleCompletion(msg);
       break;
     case "textDocument/didSave":
-      protocol.handleDiagnostics(msg);
+      protocol.handleSave(msg);
       break;
   }
 }
