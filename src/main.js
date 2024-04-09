@@ -25,7 +25,7 @@ function response(msg) {
       protocol.handleOpen(msg);
       break;
     case "textDocument/didChange":
-      protocol.updateState(msg);
+      protocol.handleChange(msg);
       break;
     case "textDocument/hover":
       protocol.handleHover(msg);

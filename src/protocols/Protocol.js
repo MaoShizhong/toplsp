@@ -1,4 +1,4 @@
-import complections from "./completions/index.js";
+import completions from "./completions/index.js";
 
 export default class Protocol {
   #analyzer;
