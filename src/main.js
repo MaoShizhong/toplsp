@@ -1,16 +1,12 @@
-import { decodeMessage } from "./parser.js";
-import handleInitalization from "./protocols/handleInitalization.js/index.js";
-import handleOpen from "./protocols/handleOpen.js/index.js";
-import handleChange from "./protocols/handleChange.js/index.js";
-import handleHover from "./protocols/handleHover.js/index.js";
-import handleCompletion from "./protocols/handleCompletion.js/index.js";
-import handleDiagnostics from "./protocols/handleDiagnostic.js";
+import Encoder from "./Encoder.js";
+import Protocol from "./protocols/Protocol.js";
 
-const state = new Map();
+const encoder = new Encoder();
+const protocol = new Protocol(analyzer, encoder);
 
 process.stdin.on("data", (data) => {
   try {
-    const msg = decodeMessage(data.toString());
+    const msg = decode(data.toString());
     response(msg);
   } catch (e) {
     console.error(e);
@@ -21,23 +17,23 @@ function response(msg) {
   const { method } = msg;
   switch (method) {
     case "initialize":
-      handleInitalization(msg);
+      protocol.handleInitalization(msg);
       break;
     case "textDocument/didOpen":
-      handleOpen(state, msg);
-      handleDiagnostics(state, msg);
+      protocol.handleOpen(state, msg);
+      protocol.handleDiagnostics(state, msg);
       break;
     case "textDocument/didChange":
-      handleChange(state, msg);
+      protocol.handleChange(state, msg);
       break;
     case "textDocument/hover":
-      handleHover(state, msg);
+      protocol.handleHover(state, msg);
       break;
     case "textDocument/completion":
-      handleCompletion(msg);
+      protocol.handleCompletion(msg);
       break;
     case "textDocument/didSave":
-      handleDiagnostics(state, msg);
+      protocol.handleDiagnostics(state, msg);
       break;
   }
 }
