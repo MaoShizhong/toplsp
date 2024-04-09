@@ -1,16 +1,3 @@
-import { encodeMessage } from "../parser.js";
-
-export default function (state, msg) {
-  const uri = msg.params.textDocument.uri;
-  const diagnostics = parseDiagnostics(state.get(uri));
-
-  const response = encodeMessage({
-    method: "textDocument/publishDiagnostics",
-    params: { uri, diagnostics },
-  });
-  console.log(response);
-}
-
 function parseDiagnostics(text) {
   const diagnostics = [];
   const lines = text.split("\n");
