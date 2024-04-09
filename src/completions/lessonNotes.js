@@ -4,7 +4,7 @@ const insertTextFormat = 2; // Format Snippet
 export default [
   {
     kind,
-    label: "Note Tag",
+    label: "Note",
     detail: "Insert a Note",
     sortText: "note",
     filterText: '<div class="lesson-note" markdown="1">',
@@ -14,7 +14,7 @@ export default [
   },
   {
     kind,
-    label: "Warning Tag",
+    label: "Warning",
     detail: "Insert a warning",
     sortText: "warning",
     filterText: '<div class="lesson-note lesson-note--warning" markdown="1">',
@@ -24,7 +24,7 @@ export default [
   },
   {
     kind,
-    label: "Tip Tag",
+    label: "Tip",
     detail: "Insert a tip",
     sortText: "tip",
     filterText: '<div class="lesson-note lesson-note--tip" markdown="1">',
