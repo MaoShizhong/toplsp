@@ -1,5 +1,4 @@
 import { decodeMessage } from "./parser.js";
-import logger from "./logger.js";
 import handleInitalization from "./protocols/handleInitalization.js/index.js";
 import handleOpen from "./protocols/handleOpen.js/index.js";
 import handleChange from "./protocols/handleChange.js/index.js";
@@ -23,9 +22,6 @@ function response(msg) {
   switch (method) {
     case "initialize":
       handleInitalization(msg);
-      break;
-    case "initialized":
-      logger(method, "Inetalized Succeeded");
       break;
     case "textDocument/didOpen":
       handleOpen(state, msg);
