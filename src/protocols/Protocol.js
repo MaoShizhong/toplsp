@@ -1,3 +1,5 @@
+import complections from "./completions/index.js";
+
 export default class Protocol {
   #analyzer;
   #encoder;
