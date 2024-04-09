@@ -20,20 +20,20 @@ function response(msg) {
       protocol.handleInitalization(msg);
       break;
     case "textDocument/didOpen":
-      protocol.handleOpen(state, msg);
-      protocol.handleDiagnostics(state, msg);
+      protocol.updateState(msg);
+      protocol.handleDiagnostics(msg);
       break;
     case "textDocument/didChange":
-      protocol.handleChange(state, msg);
+      protocol.updateState(msg);
       break;
     case "textDocument/hover":
-      protocol.handleHover(state, msg);
+      protocol.handleHover(msg);
       break;
     case "textDocument/completion":
       protocol.handleCompletion(msg);
       break;
     case "textDocument/didSave":
-      protocol.handleDiagnostics(state, msg);
+      protocol.handleDiagnostics(msg);
       break;
   }
 }
