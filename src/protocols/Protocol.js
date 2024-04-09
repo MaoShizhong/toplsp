@@ -22,7 +22,7 @@ export default class Protocol {
     console.log(response);
   }
 
-  handleSave(msg) {
+  handleDiagnostics(msg) {
     const uri = msg.params.textDocument.uri;
     const diagnostics = this.#analyzer.generateDiagnostics(this.#state);
 
