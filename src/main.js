@@ -2,11 +2,12 @@ import Encoder from "./Encoder.js";
 import Protocol from "./protocols/Protocol.js";
 
 const encoder = new Encoder();
+const analyzer = undefined;
 const protocol = new Protocol(analyzer, encoder);
 
 process.stdin.on("data", (data) => {
   try {
-    const msg = decode(data.toString());
+    const msg = encoder.decode(data.toString());
     response(msg);
   } catch (e) {
     console.error(e);
