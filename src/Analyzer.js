@@ -1,4 +1,4 @@
-import Diagnostic from "./diagnostics/Diagnostic";
+import Diagnostic from "./diagnostics/Diagnostic.js";
 
 export default class Analyzer {
   #state = new Map();
