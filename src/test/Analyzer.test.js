@@ -1,4 +1,5 @@
 import Analyzer from "../Analyzer.js";
+import Diagnostics from "../diagnostics/Diagnostics.js";
 
 describe("Gets content correctly", () => {
   test("States is returned correctly", () => {
@@ -18,6 +19,6 @@ describe("Correct diagnostics returned", () => {
     const analyzer = new Analyzer();
     analyzer.updateState("fakeURL", "");
     const diagnostics = analyzer.generateDiagnostics("fakeURL");
-    expect(diagnostics).toContainEqual("");
+    expect(diagnostics).toContainEqual(Diagnostics.introductionMissing());
   });
 });
