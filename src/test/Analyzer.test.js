@@ -6,4 +6,9 @@ describe("Gets content correctly", () => {
     analyzer.updateState("fakeURL", "Hello content");
     expect(analyzer.getContent("fakeURL")).toBe("Hello content");
   });
+
+  test("State returns empty if no state is set", () => {
+    const analzyer = new Analyzer();
+    expect(analzyer.getContent("noneURL")).toBe("");
+  });
 });
