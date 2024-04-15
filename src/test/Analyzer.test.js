@@ -21,4 +21,11 @@ describe("Correct diagnostics returned", () => {
     const diagnostics = analyzer.generateDiagnostics("fakeURL");
     expect(diagnostics).toContainEqual(Diagnostics.introductionMissing());
   });
+
+  test("Does not Contains introduction diagnostic", () => {
+    const analyzer = new Analyzer();
+    analyzer.updateState("fakeURL", "### Introduction");
+    const diagnostics = analyzer.generateDiagnostics("fakeURL");
+    expect(diagnostics).not.toContainEqual(Diagnostics.introductionMissing());
+  });
 });
