@@ -1,3 +1,5 @@
+import Diagnostic from "./diagnostics/Diagnostic";
+
 export default class Analyzer {
   #state = new Map();
 
@@ -13,15 +15,14 @@ export default class Analyzer {
     const diagnostics = [];
     const lines = this.getContent(uri).split("\n");
     if (lines[0] !== "### Introduction") {
-      diagnostics.push({
-        range: {
-          start: { line: 0, character: 0 },
-          end: { line: 0, character: lines[0].length },
-        },
-        sevirity: 2,
-        message:
+      const introductionDiagnostic = new Diagnostic()
+        .line(0, 0)
+        .character(0, 0)
+        .sevirity(2)
+        .message(
           "There should be an introduction section on the top of the document",
-      });
+        );
+      diagnostics.push(introductionDiagnostic);
     }
 
     return diagnostics;

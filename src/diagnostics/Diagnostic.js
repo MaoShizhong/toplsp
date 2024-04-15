@@ -1,27 +1,19 @@
 export default class Diagnostic {
-  constructor(range, sevirity, message) {
-    this.range = range;
-    this.sevirity = sevirity;
-    this.message = message;
+  constructor() {
+    this.range = {};
+    this.sevirity = 1;
+    this.message = "";
   }
 
-  startLine(number) {
-    this.range.start.line = number;
+  line(startLine, endLine) {
+    this.range.start.line = startLine;
+    this.range.end.line = endLine;
     return this;
   }
 
-  endLine(number) {
-    this.range.end.line = number;
-    return this;
-  }
-
-  startCharacter(number) {
-    this.range.start.character = number;
-    return this;
-  }
-
-  endCharacter(number) {
-    this.range.end.character = number;
+  character(startCharacter, endCharacter) {
+    this.range.start.character = startCharacter;
+    this.range.end.character = endCharacter;
   }
 
   sevirity(number) {
