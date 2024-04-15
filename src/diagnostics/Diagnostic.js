@@ -1,6 +1,9 @@
 export default class Diagnostic {
   constructor() {
-    this.range = {};
+    this.range = {
+      start: {},
+      end: {},
+    };
     this.sevirity = 1;
     this.message = "";
   }
@@ -14,6 +17,7 @@ export default class Diagnostic {
   character(startCharacter, endCharacter) {
     this.range.start.character = startCharacter;
     this.range.end.character = endCharacter;
+    return this;
   }
 
   sevirity(number) {
