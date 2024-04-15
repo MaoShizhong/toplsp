@@ -12,3 +12,12 @@ describe("Gets content correctly", () => {
     expect(analzyer.getContent("noneURL")).toBe("");
   });
 });
+
+describe("Correct diagnostics returned", () => {
+  test("Contains introduction diagnostic", () => {
+    const analyzer = new Analyzer();
+    analyzer.updateState("fakeURL", "");
+    const diagnostics = analyzer.generateDiagnostics("fakeURL");
+    expect(diagnostics).toContainEqual("");
+  });
+});

@@ -1,4 +1,4 @@
-import Diagnostic from "./diagnostics/Diagnostic.js";
+import Diagnostics from "./diagnostics/Diagnostics.js";
 
 export default class Analyzer {
   #state = new Map();
@@ -15,15 +15,7 @@ export default class Analyzer {
     const diagnostics = [];
     const lines = this.getContent(uri).split("\n");
     if (lines[0] !== "### Introduction") {
-      const introductionDiagnostic = new Diagnostic()
-        .line(0, 0)
-        .character(0, 0)
-        .sevirityLevel(2)
-        .diagnosticMessage(
-          "There should be an introduction section on the top of the document",
-        );
-
-      diagnostics.push(introductionDiagnostic);
+      diagnostics.push(Diagnostics.introductionMissing());
     }
 
     return diagnostics;
