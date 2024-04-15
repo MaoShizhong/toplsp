@@ -1,4 +1,4 @@
-class Diagnostic {
+export default class Diagnostic {
   constructor(range, sevirity, message) {
     this.range = range;
     this.sevirity = sevirity;
