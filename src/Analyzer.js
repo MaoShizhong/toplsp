@@ -18,10 +18,11 @@ export default class Analyzer {
       const introductionDiagnostic = new Diagnostic()
         .line(0, 0)
         .character(0, 0)
-        .sevirity(2)
-        .message(
+        .sevirityLevel(2)
+        .diagnosticMessage(
           "There should be an introduction section on the top of the document",
         );
+
       diagnostics.push(introductionDiagnostic);
     }
 

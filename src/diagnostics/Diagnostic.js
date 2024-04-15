@@ -20,12 +20,12 @@ export default class Diagnostic {
     return this;
   }
 
-  sevirity(number) {
+  sevirityLevel(number) {
     this.sevirity = number;
     return this;
   }
 
-  message(string) {
+  diagnosticMessage(string) {
     this.message = string;
     return this;
   }
