@@ -1,4 +1,4 @@
-import Diagnostic from "./Diagnostic";
+import Diagnostic from "./Diagnostic.js";
 
 export default class Diagnostics {
   static introductionMissing() {
