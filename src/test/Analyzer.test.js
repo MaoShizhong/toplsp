@@ -33,5 +33,9 @@ describe("Correct diagnostics returned", () => {
     expect(diagnostics).not.toContainEqual(Diagnostics.introductionMissing());
   });
 
-  test("Contains lesson overview diagnostic", () => {});
+  test("Contains lesson overview diagnostic", () => {
+    analyzer.updateState("fakeURL", "### Introduction");
+    const diagnostics = analyzer.generateDiagnostics("fakeURL");
+    expect(diagnostics).toContainEqual(Diagnostics.lessonOverviewMissing());
+  });
 });
