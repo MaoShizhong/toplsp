@@ -23,7 +23,7 @@ export default class Analyzer {
     lines.forEach((line, lineNumber) => {
       if (line === sections.headers[sections.index]) {
         sections.index = sections.index + 1;
-        sections.line = lineNumber;
+        sections.line = lineNumber + 1;
       }
     });
 
