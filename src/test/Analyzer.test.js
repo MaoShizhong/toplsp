@@ -15,17 +15,23 @@ describe("Gets content correctly", () => {
 });
 
 describe("Correct diagnostics returned", () => {
+  let analyzer = new Analyzer();
+
+  beforeEach(() => {
+    analyzer = new Analyzer();
+  });
+
   test("Contains introduction diagnostic", () => {
-    const analyzer = new Analyzer();
     analyzer.updateState("fakeURL", "");
     const diagnostics = analyzer.generateDiagnostics("fakeURL");
     expect(diagnostics).toContainEqual(Diagnostics.introductionMissing());
   });
 
   test("Does not Contains introduction diagnostic", () => {
-    const analyzer = new Analyzer();
     analyzer.updateState("fakeURL", "### Introduction");
     const diagnostics = analyzer.generateDiagnostics("fakeURL");
     expect(diagnostics).not.toContainEqual(Diagnostics.introductionMissing());
   });
+
+  test("Contains lesson overview diagnostic", () => {});
 });
