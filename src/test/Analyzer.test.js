@@ -36,6 +36,6 @@ describe("Correct diagnostics returned", () => {
   test("Contains lesson overview diagnostic", () => {
     analyzer.updateState("fakeURL", "### Introduction");
     const diagnostics = analyzer.generateDiagnostics("fakeURL");
-    expect(diagnostics).toContainEqual(Diagnostics.lessonOverviewMissing(1, 1));
+    expect(diagnostics).toContainEqual(Diagnostics.lessonOverviewMissing(1));
   });
 });

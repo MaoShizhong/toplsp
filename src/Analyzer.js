@@ -29,7 +29,7 @@ export default class Analyzer {
 
     if (sections.index <= sections.headers.length) {
       diagnostics.push(
-        getMissingSection(sections.headers[sections.index], sections.line),
+        this.getMissingSection(sections.headers[sections.index], sections.line),
       );
     }
 
