@@ -10,4 +10,14 @@ export default class Diagnostics {
         "There should be an introduction section on the top of the document",
       );
   }
+
+  static lessonOverviewMissing(lineStart, lineEnd) {
+    return new Diagnostic()
+      .line(lineStart, lineEnd)
+      .character(0, 0)
+      .sevirityLevel(2)
+      .diagnosticMessage(
+        "There should be lesson overview section after introduction",
+      );
+  }
 }
