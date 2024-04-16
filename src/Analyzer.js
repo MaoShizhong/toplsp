@@ -14,10 +14,34 @@ export default class Analyzer {
   generateDiagnostics(uri) {
     const diagnostics = [];
     const lines = this.getContent(uri).split("\n");
-    if (lines[0] !== "### Introduction") {
-      diagnostics.push(Diagnostics.introductionMissing());
+    const sections = {
+      index: 0,
+      line: 0,
+      headers: ["### Introduction", "### Overview"],
+    };
+
+    lines.forEach((line, lineNumber) => {
+      if (line === sections.headers[sections.index]) {
+        sections.index = sections.index + 1;
+        sections.line = lineNumber;
+      }
+    });
+
+    if (sections.index <= sections.headers.length) {
+      diagnostics.push(
+        getMissingSection(sections.headers[sections.index], sections.line),
+      );
     }
 
     return diagnostics;
+  }
+
+  getMissingSection(header, lineNumber) {
+    switch (header) {
+      case "### Introduction":
+        return Diagnostics.introductionMissing();
+      case "### Overview":
+        return Diagnostics.lessonOverviewMissing(lineNumber);
+    }
   }
 }

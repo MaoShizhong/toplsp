@@ -11,9 +11,9 @@ export default class Diagnostics {
       );
   }
 
-  static lessonOverviewMissing(lineStart, lineEnd) {
+  static lessonOverviewMissing(lineNumber) {
     return new Diagnostic()
-      .line(lineStart, lineEnd)
+      .line(lineNumber, lineNumber)
       .character(0, 0)
       .sevirityLevel(2)
       .diagnosticMessage(
