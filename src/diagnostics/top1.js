@@ -1,4 +1,4 @@
-function TOP001(params, onError) {
+export default function TOP001(params, onError) {
   const tokensWithLinks = params.parsers.markdownit.tokens?.filter((token) =>
     token.children?.some((child) => child.type === "link_open"),
   );
