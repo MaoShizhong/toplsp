@@ -10,7 +10,7 @@ export default class Diagnostic {
 
   line(startLine, endLine) {
     this.range.start.line = startLine;
-    this.range.end.line = endLine;
+    this.range.end.line = endLine ?? startLine;
     return this;
   }
 
