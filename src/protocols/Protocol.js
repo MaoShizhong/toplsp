@@ -11,6 +11,7 @@ export default class Protocol {
 
   handleOpen(msg) {
     const uri = msg.params.textDocument.uri;
+    console.log(uri);
     const content = msg.params.textDocument.text;
 
     this.#analyzer.updateState(uri, content);
@@ -19,6 +20,7 @@ export default class Protocol {
 
   handleChange(msg) {
     const uri = msg.params.textDocument.uri;
+    console.error(uri);
     const content = msg.params.contentChanges[0].text;
 
     this.#analyzer.updateState(uri, content);
@@ -75,6 +77,7 @@ export default class Protocol {
       result: initalizeResponse,
     });
 
+    console.error(msg);
     console.log(response);
   }
 }

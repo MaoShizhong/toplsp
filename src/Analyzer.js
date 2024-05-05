@@ -1,7 +1,7 @@
 import Diagnostics from "./diagnostics/Diagnostics.js";
 import Diagnostic from "./diagnostics/Diagnostic.js";
-import top1 from "./diagnostics/top1.js";
-import MarkdownIt from "markdown-it";
+import { parse } from "jsonc-parser";
+import markdownlint from "markdownlint";
 
 export default class Analyzer {
   #state = new Map();
@@ -18,19 +18,10 @@ export default class Analyzer {
   generateDiagnostics(uri) {
     const diagnostics = [];
     const content = this.getContent(uri);
-    const params = {
-      parsers: { markdownit: { tokens: this.#parser.parse(content) } },
-    };
-    const onError = (errorObj) => {
-      diagnostics.push(
-        new Diagnostic()
-          .line(errorObj.lineNumber ?? 0)
-          .character(0, 0)
-          .sevirityLevel(2)
-          .diagnosticMessage(errorObj.detail),
-      );
-    };
-    top1(params, onError);
+    const config = uri.lastIndexOf(".markdowncli-config.jsonc");
+    console.error(config);
+    console.error(uri);
+
     // diagnostics.push(token);
     // const sections = {
     //   index: 0,
