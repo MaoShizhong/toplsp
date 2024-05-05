@@ -10,18 +10,12 @@ export default class Protocol {
   }
 
   handleOpen(msg) {
-    const uri = msg.params.textDocument.uri;
-    const content = msg.params.textDocument.text;
-
-    this.#analyzer.updateState(uri, content);
+    this.#analyzer.updateState(msg);
     this.#diagnosticsResponse(msg);
   }
 
   handleChange(msg) {
-    const uri = msg.params.textDocument.uri;
-    const content = msg.params.contentChanges[0].text;
-
-    this.#analyzer.updateState(uri, content);
+    this.#analyzer.updateState(msg);
   }
 
   handleSave(msg) {
@@ -30,7 +24,7 @@ export default class Protocol {
 
   #diagnosticsResponse(msg) {
     const uri = msg.params.textDocument.uri;
-    const diagnostics = this.#analyzer.generateDiagnostics(uri);
+    const diagnostics = this.#analyzer.generateDiagnostics();
     const response = this.#encoder.encode({
       method: "textDocument/publishDiagnostics",
       params: { uri, diagnostics },
@@ -45,10 +39,8 @@ export default class Protocol {
   }
 
   handleHover(msg) {
-    const uri = msg.params.textDocument.uri;
     const { line } = msg.params.position;
-
-    const content = this.#analyzer.getContent(uri);
+    const content = this.#analyzer.getContent(msg);
     const contents = content.split("\n")[line];
     const response = encodeMessage({
       id: msg.id,
