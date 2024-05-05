@@ -5,7 +5,6 @@ import markdownlint from "markdownlint";
 
 export default class Analyzer {
   #state = new Map();
-  #parser = new MarkdownIt();
 
   updateState(uri, content) {
     this.#state.set(uri, content);
