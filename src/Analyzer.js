@@ -47,12 +47,12 @@ export default class Analyzer {
     }
 
     if (this.#options) {
-      options.files = [rootURI];
+      this.#options.files = [rootURI];
+      const result = markdownlint.sync(this.#options)[rootURI];
+      return result.map(this.#parseResult);
     } else {
       return [];
     }
-
-    return markdownlint.sync(options).map(this.#parseResult);
   }
 
   #parseResult(result) {

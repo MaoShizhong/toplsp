@@ -47,7 +47,7 @@ export default class Protocol {
     const { line } = msg.params.position;
     const content = this.#analyzer.getContent(uri);
     const contents = content.split("\n")[line];
-    const response = encodeMessage({
+    const response = this.#encoder.encode({
       id: msg.id,
       result: {
         contents,
