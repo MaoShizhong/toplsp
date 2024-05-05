@@ -11,13 +11,15 @@ export default class Protocol {
 
   handleOpen(msg) {
     const uri = msg.params.textDocument.uri;
-    const content = msg.params.textDocument.content;
-    this.#analyzer.updateState(msg);
-    this.#diagnosticsResponse(msg);
+    const content = msg.params.textDocument.text;
+    this.#analyzer.updateState(uri, content);
+    this.#diagnosticsResponse(uri);
   }
 
   handleChange(msg) {
-    this.#analyzer.updateState(msg);
+    const uri = msg.params.textDocument.uri;
+    const content = msg.params.contentChanges[0].text;
+    this.#analyzer.updateState(uri, content);
   }
 
   handleSave(msg) {
