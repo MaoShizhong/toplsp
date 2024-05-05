@@ -6,7 +6,7 @@ export default class Diagnostic {
         character: 0,
       },
       end: {
-        character: result.errorRange,
+        character: 999,
         line: result.lineNumber - 1,
       },
     };
