@@ -2,6 +2,7 @@ import Diagnostics from "./diagnostics/Diagnostics.js";
 import Diagnostic from "./diagnostics/Diagnostic.js";
 import { parse } from "jsonc-parser";
 import markdownlint from "markdownlint";
+import fs from "fs";
 
 export default class Analyzer {
   #state = new Map();
@@ -14,35 +15,32 @@ export default class Analyzer {
     return this.#state.get(uri) ?? "";
   }
 
-  generateDiagnostics(uri) {
+  async generateDiagnostics(uri) {
     const diagnostics = [];
-    const content = this.getContent(uri);
-    const config = uri.lastIndexOf(".markdowncli-config.jsonc");
-    if (config === -1) {
-      return [];
+    const index = uri.indexOf("curriculum/");
+    if (index == -1) {
+      return diagnostics;
     }
 
-    console.error(uri);
+    const path = uri.slice(0, index + "curriculum/".length);
 
-    // diagnostics.push(token);
-    // const sections = {
-    //   index: 0,
-    //   line: 0,
-    //   headers: ["### Introduction", "### Overview"],
-    // };
-    //
-    // lines.forEach((line, lineNumber) => {
-    //   if (line === sections.headers[sections.index]) {
-    //     sections.index = sections.index + 1;
-    //     sections.line = lineNumber + 1;
-    //   }
-    // });
-    //
-    // if (sections.index <= sections.headers.length) {
-    //   diagnostics.push(
-    //     this.getMissingSection(sections.headers[sections.index], sections.line),
-    //   );
-    // }
+    try {
+      const config = new String(
+        fs.readFileSync(path + ".markdownlint-cli2.jsonc"),
+      );
+      const options = parse(config);
+      const rulePromises = options.customRules.map(
+        (rule) => import(path + rule.slice(2)),
+      );
+
+      options.customRules = await Promise.all(rulePromises);
+      options.customRules = options.customRules.map((rule) => rule.default);
+      options.files = [uri];
+      const result = markdownlint.sync(options);
+      console.log(result);
+    } catch (e) {
+      console.error(e);
+    }
 
     return diagnostics;
   }
