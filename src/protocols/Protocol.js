@@ -26,8 +26,7 @@ export default class Protocol {
     this.#diagnosticsResponse(msg);
   }
 
-  #diagnosticsResponse(msg) {
-    const uri = msg.params.textDocument.uri;
+  #diagnosticsResponse(uri) {
     const diagnostics = this.#analyzer.generateDiagnostics(uri);
     const response = this.#encoder.encode({
       method: "textDocument/publishDiagnostics",
