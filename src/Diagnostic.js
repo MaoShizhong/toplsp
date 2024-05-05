@@ -1,15 +1,17 @@
-export default class Diagnostic {
-  constructor() {
-    this.range = {
-      start: {},
-      end: {},
-    };
-    this.sevirity = 1;
-    this.message = "";
+export default class DiagnosticBuilder {
+  #range = { start: {}, end: {} };
+  #sevirity = 1;
+  #message = "";
+  #codeDescription = "";
+  #source = "Toplsp";
+
+  constructor(
+
+  lineStart(lineStart) {
+    this.range.start.line = startLine;
   }
 
-  line(startLine, endLine) {
-    this.range.start.line = startLine;
+  errorRange(lineEnd) {
     this.range.end.line = endLine ?? startLine;
     return this;
   }

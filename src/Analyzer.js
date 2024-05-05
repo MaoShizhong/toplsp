@@ -1,5 +1,4 @@
-import Diagnostics from "./diagnostics/Diagnostics.js";
-import Diagnostic from "./diagnostics/Diagnostic.js";
+import Diagnostic from "./Diagnostic.js";
 import { parse } from "jsonc-parser";
 import markdownlint from "markdownlint";
 import fs from "fs";
@@ -48,19 +47,12 @@ export default class Analyzer {
 
     if (this.#options) {
       this.#options.files = [rootURI];
-      const result = markdownlint.sync(this.#options)[rootURI];
-      return result.map(this.#parseResult);
+      return markdownlint
+        .sync(this.#options)
+        [rootURI].map((r) => new Diagnostic(r));
     } else {
       return [];
     }
-  }
-
-  #parseResult(result) {
-    return new Diagnostic()
-      .line(result.lineNumber)
-      .character(0, 0)
-      .sevirityLevel(2)
-      .diagnosticMessage(result.errorDetail);
   }
 
   #getRootURI(uri) {
