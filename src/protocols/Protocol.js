@@ -11,7 +11,6 @@ export default class Protocol {
 
   handleOpen(msg) {
     const uri = msg.params.textDocument.uri;
-    console.log(uri);
     const content = msg.params.textDocument.text;
 
     this.#analyzer.updateState(uri, content);
