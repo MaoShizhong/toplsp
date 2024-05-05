@@ -1,13 +1,13 @@
 export default class Diagnostic {
   constructor(result) {
-    const lineEnd = result.lineNumber - 1 + result.errorRange ?? 0;
     this.range = {
       start: {
         line: result.lineNumber - 1,
         character: 0,
       },
       end: {
-        line: lineEnd,
+        character: result.errorRange,
+        line: result.lineNumber - 1,
       },
     };
 
