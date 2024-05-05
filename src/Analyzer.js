@@ -54,17 +54,7 @@ export default class Analyzer {
     }
 
     const result = markdownlint.sync(options);
-    console.error(result.toString());
     return diagnostics;
-  }
-
-  getMissingSection(header, lineNumber) {
-    switch (header) {
-      case "### Introduction":
-        return Diagnostics.introductionMissing();
-      case "### Overview":
-        return Diagnostics.lessonOverviewMissing(lineNumber);
-    }
   }
 
   #getRootURI(uri) {
