@@ -8,15 +8,6 @@ export default class Analyzer {
   #state = new Map();
   #options = undefined;
 
-  #extractUri(msg) {
-    const uri = msg.params.textDocument.uri;
-    if (uri && uri.startsWith("file://")) {
-      return uri.slice("file://".length);
-    } else {
-      return uri;
-    }
-  }
-
   async #initOptions(uri) {
     const index = uri.indexOf("curriculum/");
     if (index === -1) {
@@ -41,31 +32,29 @@ export default class Analyzer {
     }
   }
 
-  updateState(msg) {
-    const uri = this.#extractUri(msg);
-    const content = msg.params.textDocument.text;
+  updateState(uri, content) {
     this.#state.set(uri, content);
   }
 
-  getContent(msg) {
-    const uri = this.#extractUri(msg);
+  getContent(uri) {
     return this.#state.get(uri) ?? "";
   }
 
-  async generateDiagnostics() {
+  async generateDiagnostics(uri) {
     const diagnostics = [];
+    const rootURI = this.#getRootURI(uri);
     if (!this.#options) {
-      this.#initOptions();
+      this.#initOptions(rootURI);
     }
 
     if (this.#options) {
-      options.files = [uri];
+      options.files = [rootURI];
     } else {
       return diagnostics;
     }
 
     const result = markdownlint.sync(options);
-    console.log(result);
+    console.error(result.toString());
     return diagnostics;
   }
 
@@ -75,6 +64,14 @@ export default class Analyzer {
         return Diagnostics.introductionMissing();
       case "### Overview":
         return Diagnostics.lessonOverviewMissing(lineNumber);
+    }
+  }
+
+  #getRootURI(uri) {
+    if (uri && uri.startsWith("file://")) {
+      return uri.slice("file://".length);
+    } else {
+      return uri;
     }
   }
 }

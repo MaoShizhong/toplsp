@@ -10,6 +10,8 @@ export default class Protocol {
   }
 
   handleOpen(msg) {
+    const uri = msg.params.textDocument.uri;
+    const content = msg.params.textDocument.content;
     this.#analyzer.updateState(msg);
     this.#diagnosticsResponse(msg);
   }
@@ -24,7 +26,7 @@ export default class Protocol {
 
   #diagnosticsResponse(msg) {
     const uri = msg.params.textDocument.uri;
-    const diagnostics = this.#analyzer.generateDiagnostics();
+    const diagnostics = this.#analyzer.generateDiagnostics(uri);
     const response = this.#encoder.encode({
       method: "textDocument/publishDiagnostics",
       params: { uri, diagnostics },
