@@ -41,7 +41,6 @@ export default class Analyzer {
   }
 
   async generateDiagnostics(uri) {
-    const diagnostics = [];
     const rootURI = this.#getRootURI(uri);
     if (!this.#options) {
       this.#initOptions(rootURI);
@@ -50,11 +49,18 @@ export default class Analyzer {
     if (this.#options) {
       options.files = [rootURI];
     } else {
-      return diagnostics;
+      return [];
     }
 
-    const result = markdownlint.sync(options);
-    return diagnostics;
+    return markdownlint.sync(options).map(this.#parseResult);
+  }
+
+  #parseResult(result) {
+    return new Diagnostic()
+      .line(result.lineNumber)
+      .character(0, 0)
+      .sevirityLevel(2)
+      .diagnosticMessage(result.errorDetail);
   }
 
   #getRootURI(uri) {

@@ -23,7 +23,8 @@ export default class Protocol {
   }
 
   handleSave(msg) {
-    this.#diagnosticsResponse(msg);
+    const uri = msg.params.textDocument.uri;
+    this.#diagnosticsResponse(uri);
   }
 
   #diagnosticsResponse(uri) {
