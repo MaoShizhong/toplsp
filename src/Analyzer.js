@@ -18,7 +18,10 @@ export default class Analyzer {
     const diagnostics = [];
     const content = this.getContent(uri);
     const config = uri.lastIndexOf(".markdowncli-config.jsonc");
-    console.error(config);
+    if (config === -1) {
+      return [];
+    }
+
     console.error(uri);
 
     // diagnostics.push(token);
