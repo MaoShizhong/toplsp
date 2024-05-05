@@ -39,7 +39,7 @@ export default class Analyzer {
     return this.#state.get(uri) ?? "";
   }
 
-  async generateDiagnostics(uri) {
+  generateDiagnostics(uri) {
     const rootURI = this.#getRootURI(uri);
     if (!this.#options) {
       this.#initOptions(rootURI);
@@ -47,9 +47,9 @@ export default class Analyzer {
 
     if (this.#options) {
       this.#options.files = [rootURI];
-      return markdownlint
-        .sync(this.#options)
-        [rootURI].map((r) => new Diagnostic(r));
+      const results = markdownlint.sync(this.#options)[rootURI];
+      const diagnostics = results.map((r) => new Diagnostic(r));
+      return diagnostics;
     } else {
       return [];
     }

@@ -1,34 +1,21 @@
-export default class DiagnosticBuilder {
-  #range = { start: {}, end: {} };
-  #sevirity = 1;
-  #message = "";
-  #codeDescription = "";
-  #source = "Toplsp";
+export default class Diagnostic {
+  constructor(result) {
+    const lineEnd = result.lineNumber - 1 + result.errorRange ?? 0;
+    this.range = {
+      start: {
+        line: result.lineNumber - 1,
+        character: 0,
+      },
+      end: {
+        line: lineEnd,
+      },
+    };
 
-  constructor(
-
-  lineStart(lineStart) {
-    this.range.start.line = startLine;
-  }
-
-  errorRange(lineEnd) {
-    this.range.end.line = endLine ?? startLine;
-    return this;
-  }
-
-  character(startCharacter, endCharacter) {
-    this.range.start.character = startCharacter;
-    this.range.end.character = endCharacter;
-    return this;
-  }
-
-  sevirityLevel(number) {
-    this.sevirity = number;
-    return this;
-  }
-
-  diagnosticMessage(string) {
-    this.message = string;
+    this.sevirity = 2;
+    this.codeDescription = { href: result.ruleInformation };
+    this.source = "toplsp";
+    this.message = result.errorDetail;
+    this.code = result.ruleNames[0];
     return this;
   }
 }
