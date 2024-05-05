@@ -43,8 +43,9 @@ export default class Protocol {
   }
 
   handleHover(msg) {
+    const uri = msg.params.textDocument.uri;
     const { line } = msg.params.position;
-    const content = this.#analyzer.getContent(msg);
+    const content = this.#analyzer.getContent(uri);
     const contents = content.split("\n")[line];
     const response = encodeMessage({
       id: msg.id,
