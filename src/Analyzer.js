@@ -49,7 +49,7 @@ export default class Analyzer {
   generateCodeActions(uri, range) {
     return this.#generateResults(uri)
       .filter((r) => this.#validActionResult(r, range))
-      .map((r) => new CodeAction(r));
+      .map((r) => new CodeAction(r, uri));
   }
 
   #validActionResult(result, range) {

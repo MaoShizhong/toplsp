@@ -1,27 +1,31 @@
 export default class CodeAction {
-  constructor(result) {
+  constructor(result, uri) {
     this.title = "Top fixer";
     this.kind = "quickfix";
     this.isPreferred = true;
+    const lineNumber = result.fixInfo.lineNumber - 1;
+    const characterStart = result.fixInfo.editColumn - 1;
+    const characterEnd = result.fixInfo.deleteCount - 1 + characterStart;
+    const { insertText } = result.fixInfo;
+
     this.edit = {
-      documentChanges: [
-        {
-          textDocument: null,
-          edits: {
+      changes: {
+        [uri]: [
+          {
             range: {
               start: {
-                line: result.lineNumber - 1,
-                character: result.editColumn - 1,
+                line: lineNumber,
+                character: characterStart,
               },
               end: {
-                line: result.lineNumber - 1,
-                character: result.deleteCount + result.editColumn - 1,
+                line: lineNumber - 1,
+                character: characterEnd,
               },
             },
-            newText: result.insertText,
+            newText: insertText,
           },
-        },
-      ],
+        ],
+      },
     };
   }
 }

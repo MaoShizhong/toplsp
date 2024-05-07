@@ -61,7 +61,6 @@ export default class Protocol {
       result: actions,
     });
 
-    console.error(actions);
     console.log(response);
   }
 
