@@ -24,6 +24,7 @@ export default class Protocol {
 
   handleSave(msg) {
     const uri = msg.params.textDocument.uri;
+    console.error(msg.params.textDocument.text);
     this.#diagnosticsResponse(uri);
   }
 

@@ -1,6 +1,6 @@
 import Analyzer from "./Analyzer.js";
 import Encoder from "./Encoder.js";
-import Protocol from "./Protocol.js/index.js";
+import Protocol from "./Protocol.js";
 
 const encoder = new Encoder();
 const analyzer = new Analyzer();
