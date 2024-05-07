@@ -2,6 +2,7 @@ import Diagnostic from "./Diagnostic.js";
 import { parse } from "jsonc-parser";
 import markdownlint from "markdownlint";
 import fs from "fs";
+import CodeAction from "./CodeAction.js";
 
 export default class Analyzer {
   #options = undefined;
@@ -49,7 +50,7 @@ export default class Analyzer {
     const results = this.#generateResults(uri);
     results
       .filter((r) => this.#validActionResult(r, range))
-      .map((r) => console.error("Found"));
+      .map((r) => new CodeAction(r));
   }
 
   #validActionResult(result, range) {
