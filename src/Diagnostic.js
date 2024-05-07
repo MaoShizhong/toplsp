@@ -12,7 +12,6 @@ export default class Diagnostic {
     };
 
     this.sevirity = 3;
-    console.error(typeof result.ruleInformation);
     this.codeDescription = { href: result.ruleInformation };
     this.source = "toplsp";
     this.message = result.errorDetail;

@@ -13,22 +13,18 @@ export default class Analyzer {
       return;
     }
 
-    try {
-      const path = uri.slice(0, index + "curriculum/".length);
-      const config = new String(
-        fs.readFileSync(path + ".markdownlint-cli2.jsonc"),
-      );
-      const options = parse(config);
-      const rulePromises = options.customRules.map(
-        (rule) => import(path + rule.slice(2)),
-      );
+    const path = uri.slice(0, index + "curriculum/".length);
+    const config = new String(
+      fs.readFileSync(path + ".markdownlint-cli2.jsonc"),
+    );
+    const options = parse(config);
+    const rulePromises = options.customRules.map(
+      (rule) => import(path + rule.slice(2)),
+    );
 
-      options.customRules = await Promise.all(rulePromises);
-      options.customRules = options.customRules.map((rule) => rule.default);
-      this.#options = options;
-    } catch (e) {
-      console.error(e);
-    }
+    options.customRules = await Promise.all(rulePromises);
+    options.customRules = options.customRules.map((rule) => rule.default);
+    this.#options = options;
   }
 
   updateState(uri, content) {
