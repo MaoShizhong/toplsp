@@ -45,6 +45,17 @@ export default class Analyzer {
     return this.#generateResults(uri).map((r) => new Diagnostic(r));
   }
 
+  generateCodeActions(uri, range) {
+    const results = this.#generateResults(uri);
+    results.filter((r) => this.#validActionResult(r, range)).map((r) => r.fix);
+  }
+
+  #validActionResult(result, range) {
+    const { start, end } = range;
+    const line = result.lineNumber - 1;
+    return line >= start.line && line <= end.line && result.fixInfo;
+  }
+
   #getRootURI(uri) {
     if (uri && uri.startsWith("file://")) {
       return uri.slice("file://".length);

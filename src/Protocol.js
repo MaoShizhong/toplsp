@@ -53,7 +53,9 @@ export default class Protocol {
   }
 
   handleCodeAction(msg) {
-    console.error(msg.params);
+    const uri = msg.params.textDocument.uri;
+    const range = msg.params.range;
+    this.#analyzer.generateCodeActions(uri, range);
   }
 
   handleInitalization(msg) {
