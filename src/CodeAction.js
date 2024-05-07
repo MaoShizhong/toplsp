@@ -5,7 +5,7 @@ export default class CodeAction {
     this.isPreferred = true;
     this.diagnostics = diagnostics;
 
-    const lineNumber = result.fixInfo.lineNumber - 1;
+    const lineNumber = result.lineNumber - 1;
     const characterStart = result.fixInfo.editColumn - 1;
     const characterEnd = result.fixInfo.deleteCount + characterStart;
     const { insertText } = result.fixInfo;
