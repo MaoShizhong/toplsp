@@ -47,8 +47,7 @@ export default class Analyzer {
   }
 
   generateCodeActions(uri, range) {
-    const results = this.#generateResults(uri);
-    results
+    return this.#generateResults(uri)
       .filter((r) => this.#validActionResult(r, range))
       .map((r) => new CodeAction(r));
   }
