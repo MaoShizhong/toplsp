@@ -5,7 +5,7 @@ export default class CodeAction {
     this.isPreferred = true;
     const lineNumber = result.fixInfo.lineNumber - 1;
     const characterStart = result.fixInfo.editColumn - 1;
-    const characterEnd = result.fixInfo.deleteCount - 1 + characterStart;
+    const characterEnd = result.fixInfo.deleteCount + characterStart;
     const { insertText } = result.fixInfo;
 
     this.edit = {
@@ -18,7 +18,7 @@ export default class CodeAction {
                 character: characterStart,
               },
               end: {
-                line: lineNumber - 1,
+                line: lineNumber,
                 character: characterEnd,
               },
             },
