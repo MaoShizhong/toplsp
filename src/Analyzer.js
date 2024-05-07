@@ -47,7 +47,9 @@ export default class Analyzer {
 
   generateCodeActions(uri, range) {
     const results = this.#generateResults(uri);
-    results.filter((r) => this.#validActionResult(r, range)).map((r) => r.fix);
+    results
+      .filter((r) => this.#validActionResult(r, range))
+      .map((r) => console.error("Found"));
   }
 
   #validActionResult(result, range) {
