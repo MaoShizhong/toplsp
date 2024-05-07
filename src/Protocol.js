@@ -18,12 +18,11 @@ export default class Protocol {
   }
 
   handleSave(msg) {
-    const uri = msg.params.textDocument.uri;
-    console.error(msg.params.textDocument);
     this.#diagnosticsResponse(msg);
   }
 
-  #diagnosticsResponse(uri) {
+  #diagnosticsResponse(msg) {
+    const uri = msg.params.textDocument.uri;
     const diagnostics = this.#analyzer.generateDiagnostics(uri);
     const response = this.#encoder.encode({
       method: "textDocument/publishDiagnostics",
