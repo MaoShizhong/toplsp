@@ -26,19 +26,23 @@ export default class Analyzer {
     this.#options = options;
   }
 
-  generateDiagnostics(uri) {
+  #generateResults(uri) {
     const rootURI = this.#getRootURI(uri);
     if (!this.#options) {
       this.#initOptions(rootURI);
     }
 
+    let results = [];
     if (this.#options) {
       this.#options.files = [rootURI];
-      const results = markdownlint.sync(this.#options)[rootURI];
-      return results.map((r) => new Diagnostic(r));
-    } else {
-      return [];
+      results = markdownlint.sync(this.#options)[rootURI];
     }
+
+    return results;
+  }
+
+  generateDiagnostics(uri) {
+    return this.#generateResults(uri).map((r) => new Diagnostic(r));
   }
 
   #getRootURI(uri) {
