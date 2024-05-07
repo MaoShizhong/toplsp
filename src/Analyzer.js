@@ -4,7 +4,7 @@ import markdownlint from "markdownlint";
 import fs from "fs";
 
 export default class Analyzer {
-  #state = new Map();
+  #diagnostics = [];
   #options = undefined;
 
   async #initOptions(uri) {
@@ -25,14 +25,6 @@ export default class Analyzer {
     options.customRules = await Promise.all(rulePromises);
     options.customRules = options.customRules.map((rule) => rule.default);
     this.#options = options;
-  }
-
-  updateState(uri, content) {
-    this.#state.set(uri, content);
-  }
-
-  getContent(uri) {
-    return this.#state.get(uri) ?? "";
   }
 
   generateDiagnostics(uri) {
