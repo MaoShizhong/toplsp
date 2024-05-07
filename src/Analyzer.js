@@ -46,10 +46,10 @@ export default class Analyzer {
     return this.#generateResults(uri).map((r) => new Diagnostic(r));
   }
 
-  generateCodeActions(uri, range) {
+  generateCodeActions(uri, range, diagnostics) {
     return this.#generateResults(uri)
       .filter((r) => this.#validActionResult(r, range))
-      .map((r) => new CodeAction(r, uri));
+      .map((r) => new CodeAction(r, uri, diagnostics));
   }
 
   #validActionResult(result, range) {

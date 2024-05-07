@@ -1,8 +1,10 @@
 export default class CodeAction {
-  constructor(result, uri) {
+  constructor(result, uri, diagnostics) {
     this.title = "Top fixer";
     this.kind = "quickfix";
     this.isPreferred = true;
+    this.diagnostics = diagnostics;
+
     const lineNumber = result.fixInfo.lineNumber - 1;
     const characterStart = result.fixInfo.editColumn - 1;
     const characterEnd = result.fixInfo.deleteCount + characterStart;

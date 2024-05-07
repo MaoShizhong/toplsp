@@ -55,7 +55,8 @@ export default class Protocol {
   handleCodeAction(msg) {
     const uri = msg.params.textDocument.uri;
     const range = msg.params.range;
-    const actions = this.#analyzer.generateCodeActions(uri, range);
+    const diagnostics = msg.params.context.diagnostics;
+    const actions = this.#analyzer.generateCodeActions(uri, range, diagnostics);
     const response = this.#encoder.encode({
       id: msg.id,
       result: actions,
