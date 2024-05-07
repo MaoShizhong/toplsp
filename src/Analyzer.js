@@ -4,7 +4,6 @@ import markdownlint from "markdownlint";
 import fs from "fs";
 
 export default class Analyzer {
-  #diagnostics = [];
   #options = undefined;
 
   async #initOptions(uri) {
@@ -36,8 +35,7 @@ export default class Analyzer {
     if (this.#options) {
       this.#options.files = [rootURI];
       const results = markdownlint.sync(this.#options)[rootURI];
-      const diagnostics = results.map((r) => new Diagnostic(r));
-      return diagnostics;
+      return results.map((r) => new Diagnostic(r));
     } else {
       return [];
     }

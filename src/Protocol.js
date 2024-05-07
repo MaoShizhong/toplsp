@@ -53,7 +53,7 @@ export default class Protocol {
   }
 
   handleCodeAction(msg) {
-    console.error(msg);
+    console.error(msg.params);
   }
 
   handleInitalization(msg) {
