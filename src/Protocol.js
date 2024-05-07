@@ -10,22 +10,17 @@ export default class Protocol {
   }
 
   handleOpen(msg) {
-    const uri = msg.params.textDocument.uri;
-    const content = msg.params.textDocument.text;
-    this.#analyzer.updateState(uri, content);
-    this.#diagnosticsResponse(uri);
+    this.#diagnosticsResponse(msg);
   }
 
   handleChange(msg) {
-    const uri = msg.params.textDocument.uri;
-    const content = msg.params.contentChanges[0].text;
-    this.#analyzer.updateState(uri, content);
+    this.#diagnosticsResponse(msg);
   }
 
   handleSave(msg) {
     const uri = msg.params.textDocument.uri;
-    console.error(msg.params.textDocument.text);
-    this.#diagnosticsResponse(uri);
+    console.error(msg.params.textDocument);
+    this.#diagnosticsResponse(msg);
   }
 
   #diagnosticsResponse(uri) {
