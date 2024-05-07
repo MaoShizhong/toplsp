@@ -36,5 +36,8 @@ function response(msg) {
     case "textDocument/didSave":
       protocol.handleSave(msg);
       break;
+    case "textDocument/codeAction":
+      protocol.handleCodeAction(msg);
+      break;
   }
 }

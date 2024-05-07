@@ -52,9 +52,14 @@ export default class Protocol {
     console.log(response);
   }
 
+  handleCodeAction(msg) {
+    console.error(msg);
+  }
+
   handleInitalization(msg) {
     const initalizeResponse = {
       capabilities: {
+        codeActionProvider: true,
         textDocumentSync: 1,
         hoverProvider: true,
         completionProvider: {},
