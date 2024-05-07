@@ -1,0 +1,142 @@
+2024-04-06T09:32:06.906Z: initialize
+  Initalization requested
+========================================
+2024-04-06T09:32:06.995Z: initialized
+  Inetalized Succeeded
+========================================
+2024-04-06T09:32:48.418Z: initialize
+  Initalization requested
+========================================
+2024-04-06T09:32:48.461Z: initialized
+  Inetalized Succeeded
+========================================
+2024-04-06T09:32:52.322Z: initialize
+  Initalization requested
+========================================
+2024-04-06T09:32:52.396Z: initialized
+  Inetalized Succeeded
+========================================
+2024-04-06T09:32:53.432Z: textDocument/didChange => file:///home/mclilzee/repo/toplsp/README.md
+  t
+
+========================================
+2024-04-06T09:32:53.582Z: textDocument/didChange => file:///home/mclilzee/repo/toplsp/README.md
+  thi
+
+========================================
+2024-04-06T09:32:53.737Z: textDocument/didChange => file:///home/mclilzee/repo/toplsp/README.md
+  this 
+
+========================================
+2024-04-06T09:32:53.859Z: textDocument/didChange => file:///home/mclilzee/repo/toplsp/README.md
+  this i
+
+========================================
+2024-04-06T09:32:54.008Z: textDocument/didChange => file:///home/mclilzee/repo/toplsp/README.md
+  this is
+
+========================================
+2024-04-06T09:32:54.158Z: textDocument/didChange => file:///home/mclilzee/repo/toplsp/README.md
+  this is 
+
+========================================
+2024-04-06T09:32:54.191Z: textDocument/didChange => file:///home/mclilzee/repo/toplsp/README.md
+  this is n
+
+========================================
+2024-04-06T09:32:54.340Z: textDocument/didChange => file:///home/mclilzee/repo/toplsp/README.md
+  this is new
+
+========================================
+2024-04-06T09:32:54.489Z: textDocument/didChange => file:///home/mclilzee/repo/toplsp/README.md
+  this is new 
+
+========================================
+2024-04-06T09:32:54.668Z: textDocument/didChange => file:///home/mclilzee/repo/toplsp/README.md
+  this is new t
+
+========================================
+2024-04-06T09:32:56.196Z: textDocument/didChange => file:///home/mclilzee/repo/toplsp/README.md
+  this is new te
+
+========================================
+2024-04-06T09:32:57.282Z: textDocument/didChange => file:///home/mclilzee/repo/toplsp/README.md
+  this is new tex
+
+========================================
+2024-04-06T09:32:58.177Z: textDocument/didChange => file:///home/mclilzee/repo/toplsp/README.md
+  this is new tex
+
+
+========================================
+2024-04-06T09:32:58.445Z: textDocument/didChange => file:///home/mclilzee/repo/toplsp/README.md
+  this is new tex
+s
+
+========================================
+2024-04-06T09:33:00.018Z: textDocument/didChange => file:///home/mclilzee/repo/toplsp/README.md
+  this is new tex
+s
+
+
+========================================
+2024-04-06T09:33:00.307Z: textDocument/didChange => file:///home/mclilzee/repo/toplsp/README.md
+  this is new tex
+s
+3
+
+========================================
+2024-04-06T09:33:00.897Z: textDocument/didChange => file:///home/mclilzee/repo/toplsp/README.md
+  this is new tex
+s
+3#
+
+========================================
+2024-04-06T09:33:02.142Z: textDocument/didChange => file:///home/mclilzee/repo/toplsp/README.md
+  this is new tex
+s
+3#.
+
+========================================
+2024-04-06T09:33:02.975Z: textDocument/didChange => file:///home/mclilzee/repo/toplsp/README.md
+  this is new tex
+s
+3#.C
+
+========================================
+2024-04-06T09:33:03.337Z: textDocument/didChange => file:///home/mclilzee/repo/toplsp/README.md
+  this is new tex
+s
+3#.Co
+
+========================================
+2024-04-06T09:33:03.487Z: textDocument/didChange => file:///home/mclilzee/repo/toplsp/README.md
+  this is new tex
+s
+3#.Comp
+
+========================================
+2024-04-06T09:33:03.635Z: textDocument/didChange => file:///home/mclilzee/repo/toplsp/README.md
+  this is new tex
+s
+3#.Compl
+
+========================================
+2024-04-06T09:33:03.785Z: textDocument/didChange => file:///home/mclilzee/repo/toplsp/README.md
+  this is new tex
+s
+3#.Complet
+
+========================================
+2024-04-06T09:33:03.934Z: textDocument/didChange => file:///home/mclilzee/repo/toplsp/README.md
+  this is new tex
+s
+3#.Completio
+
+========================================
+2024-04-06T09:33:04.083Z: textDocument/didChange => file:///home/mclilzee/repo/toplsp/README.md
+  this is new tex
+s
+3#.Completion
+
+========================================
