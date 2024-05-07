@@ -1,4 +1,8 @@
 {
+  "repository": {
+    "type": "git",
+    "uri": "https://github.com/Mclilzee/toplsp"
+  },
   "name": "toplsp",
   "version": "1.0.0",
   "description": "",
@@ -24,5 +28,6 @@
   },
   "engines": {
     "vscode": "^1.8.0"
-  }
+  },
+  "activationEvents": {}
 }
