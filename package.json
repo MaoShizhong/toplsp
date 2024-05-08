@@ -12,8 +12,7 @@
     "vscode:prepublish": "npm run esbuild-base -- --minify",
     "esbuild-base": "esbuild ./src/main.js --bundle --outfile=dist/extension.js --external:vscode --format=cjs --platform=node --main-fields=module,main",
     "esbuild": "npm run esbuild-base -- --sourcemap",
-    "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch",
-    "test-compile": "tsc -p ./"
+    "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch"
   },
   "author": "",
   "license": "ISC",
