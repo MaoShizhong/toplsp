@@ -9,14 +9,15 @@ const protocol = new Protocol(analyzer);
 process.stdin.on("data", (data) => {
   try {
     const msg = encoder.decode(data.toString());
-    response(msg);
+    handleMessage(msg);
   } catch (e) {
     console.error(e);
   }
 });
 
-function response(msg) {
+function handleMessage(msg) {
   const { method } = msg;
+  let response;
   switch (method) {
     case "initialize":
       response = protocol.initalizationResponse(msg);

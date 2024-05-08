@@ -4,6 +4,7 @@
     "type": "git",
     "uri": "https://github.com/Mclilzee/toplsp"
   },
+  "main": "./src/main.js",
   "name": "toplsp",
   "version": "1.0.0",
   "description": "",
