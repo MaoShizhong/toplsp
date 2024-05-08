@@ -40,7 +40,7 @@ function handleMessage(msg) {
     case "textDocument/codeAction":
       response = protocol.codeActionResponse(msg);
       break;
-    default:
+    case "initialized":
       return;
   }
 
