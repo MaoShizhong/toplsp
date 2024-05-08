@@ -1,4 +1,5 @@
 {
+  "publisher": "Mclilzee",
   "repository": {
     "type": "git",
     "uri": "https://github.com/Mclilzee/toplsp"
@@ -27,6 +28,5 @@
   },
   "engines": {
     "vscode": "^1.8.0"
-  },
-  "publisher": "Mclilzee"
+  }
 }
