@@ -2,70 +2,61 @@ import completions from "./completions/index.js";
 
 export default class Protocol {
   #analyzer;
-  #encoder;
 
-  constructor(analyzer, encoder) {
+  constructor(analyzer) {
     this.#analyzer = analyzer;
-    this.#encoder = encoder;
   }
 
-  handleOpen(msg) {
-    this.#diagnosticsResponse(msg);
+  openResponse(msg) {
+    return this.#diagnosticsResponse(msg);
   }
 
-  handleChange(msg) {
-    this.#diagnosticsResponse(msg);
+  changeResponse(msg) {
+    return this.#diagnosticsResponse(msg);
   }
 
-  handleSave(msg) {
-    this.#diagnosticsResponse(msg);
+  saveResponse(msg) {
+    return this.#diagnosticsResponse(msg);
   }
 
   #diagnosticsResponse(msg) {
     const uri = msg.params.textDocument.uri;
     const diagnostics = this.#analyzer.generateDiagnostics(uri);
-    const response = this.#encoder.encode({
+    return {
       method: "textDocument/publishDiagnostics",
       params: { uri, diagnostics },
-    });
-
-    console.log(response);
+    };
   }
 
-  handleCompletion(msg) {
-    const response = this.#encoder.encode({ id: msg.id, result: completions });
-    console.log(response);
+  completionResponse(msg) {
+    return { id: msg.id, result: completions };
   }
 
-  handleHover(msg) {
+  hoverResponse(msg) {
     const uri = msg.params.textDocument.uri;
     const { line } = msg.params.position;
     const content = this.#analyzer.getContent(uri);
     const contents = content.split("\n")[line];
-    const response = this.#encoder.encode({
+    return {
       id: msg.id,
       result: {
         contents,
       },
-    });
-
-    console.log(response);
+    };
   }
 
-  handleCodeAction(msg) {
+  codeActionResponse(msg) {
     const uri = msg.params.textDocument.uri;
     const range = msg.params.range;
     const diagnostics = msg.params.context.diagnostics;
     const actions = this.#analyzer.generateCodeActions(uri, range, diagnostics);
-    const response = this.#encoder.encode({
+    return {
       id: msg.id,
       result: actions,
-    });
-
-    console.log(response);
+    };
   }
 
-  handleInitalization(msg) {
+  initalizationResponse(msg) {
     const initalizeResponse = {
       capabilities: {
         codeActionProvider: true,
@@ -76,11 +67,9 @@ export default class Protocol {
       serverInfo: { name: "toplsp", version: "0.06" },
     };
 
-    const response = this.#encoder.encode({
+    return {
       id: msg.id,
       result: initalizeResponse,
-    });
-
-    console.log(response);
+    };
   }
 }

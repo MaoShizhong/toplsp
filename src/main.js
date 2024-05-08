@@ -4,7 +4,7 @@ import Protocol from "./Protocol.js";
 
 const encoder = new Encoder();
 const analyzer = new Analyzer();
-const protocol = new Protocol(analyzer, encoder);
+const protocol = new Protocol(analyzer);
 
 process.stdin.on("data", (data) => {
   try {
@@ -19,25 +19,27 @@ function response(msg) {
   const { method } = msg;
   switch (method) {
     case "initialize":
-      protocol.handleInitalization(msg);
+      response = protocol.initalizationResponse(msg);
       break;
     case "textDocument/didOpen":
-      protocol.handleOpen(msg);
+      response = protocol.openResponse(msg);
       break;
     case "textDocument/didChange":
-      protocol.handleChange(msg);
+      response = protocol.changeResponse(msg);
       break;
     case "textDocument/hover":
-      protocol.handleHover(msg);
+      response = protocol.handleHover(msg);
       break;
     case "textDocument/completion":
-      protocol.handleCompletion(msg);
+      response = protocol.completionResponse(msg);
       break;
     case "textDocument/didSave":
-      protocol.handleSave(msg);
+      response = protocol.saveResponse(msg);
       break;
     case "textDocument/codeAction":
-      protocol.handleCodeAction(msg);
+      response = protocol.codeActionResponse(msg);
       break;
   }
+
+  console.log(encoder.encode(response));
 }
