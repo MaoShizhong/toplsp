@@ -26,6 +26,7 @@
     "markdownlint": "^0.34.0"
   },
   "engines": {
-    "vscode": "^1.74.0"
-  }
+    "vscode": "^1.8.0"
+  },
+  "publisher": "Mclilzee"
 }
