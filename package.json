@@ -7,7 +7,6 @@
   "name": "toplsp",
   "version": "1.0.0",
   "description": "",
-  "type": "module",
   "scripts": {
     "test": "NODE_OPTIONS=\"$NODE_OPTIONS --experimental-vm-modules\" jest",
     "vscode:prepublish": "npm run esbuild-base -- --minify",
