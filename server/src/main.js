@@ -29,11 +29,14 @@ function handleMessage(msg) {
     case "textDocument/didChange":
       protocol.handleChange(msg);
       break;
-    case "textDocument/completion":
-      protocol.handleCompletion(msg);
-      break;
     case "textDocument/didSave":
       protocol.handleSave(msg);
+      break;
+    case "textDocument/didClose":
+      protocol.handleClose(msg);
+      break;
+    case "textDocument/completion":
+      protocol.handleCompletion(msg);
       break;
     case "textDocument/codeAction":
       protocol.handleCodeAction(msg);

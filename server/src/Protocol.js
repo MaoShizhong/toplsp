@@ -29,6 +29,11 @@ export default class Protocol {
     this.#diagnosticsResponse(msg);
   }
 
+  handleClose(msg) {
+    const uri = msg.params.textDocument.uri;
+    this.#analyzer.remove(uri);
+  }
+
   #diagnosticsResponse(msg) {
     const uri = msg.params.textDocument.uri;
     const diagnostics = this.#analyzer.generateDiagnostics(uri);

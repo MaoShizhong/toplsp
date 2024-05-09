@@ -12,6 +12,10 @@ export default class Analyzer {
     this.#document.set(uri, { text });
   }
 
+  remove(uri) {
+    this.#document.delete(uri);
+  }
+
   async #initOptions(uri) {
     const index = uri.indexOf("curriculum/");
     if (index === -1) {
