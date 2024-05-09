@@ -1,7 +1,7 @@
 export default class Encoder {
   encode(msg) {
     if (msg == undefined || msg.length === 0) {
-      return `Content-Length 0`;
+      return `Content-Length 0\r\n\r\n`;
     }
     const json = JSON.stringify(msg);
 

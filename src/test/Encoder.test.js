@@ -66,8 +66,8 @@ describe("Encode properly", () => {
   });
 
   test("Encode undefined / null or empty string", () => {
-    expect(encoder.encode("")).toBe("Content-Length 0");
-    expect(encoder.encode(undefined)).toBe("Content-Length 0");
-    expect(encoder.encode(null)).toBe("Content-Length 0");
+    expect(encoder.encode("")).toBe("Content-Length 0\r\n\r\n");
+    expect(encoder.encode(undefined)).toBe("Content-Length 0\r\n\r\n");
+    expect(encoder.encode(null)).toBe("Content-Length 0\r\n\r\n");
   });
 });
