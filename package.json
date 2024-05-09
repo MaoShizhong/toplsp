@@ -15,7 +15,8 @@
     "vscode:prepublish": "npm run esbuild-base -- --minify",
     "esbuild-base": "esbuild ./server/src/main.js --bundle --outfile=./server/out/extension.js --external:vscode --format=cjs --platform=node --main-fields=module,main",
     "esbuild": "npm run esbuild-base -- --sourcemap",
-    "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch"
+    "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch",
+    "install-dependencies": "cd client && npm install && cd ../server && npm install && cd .."
   },
   "devDependencies": {
     "esbuild": "^0.20.2",
