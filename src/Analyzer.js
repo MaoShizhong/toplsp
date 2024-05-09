@@ -13,7 +13,7 @@ export default class Analyzer {
   }
 
   async #initOptions(uri) {
-    const index = uri.indexOf("curriculum/");
+    const index = uri.indexOf("curriculum/.markdownlint-cli2.jsonc");
     if (index === -1) {
       return;
     }
@@ -34,14 +34,15 @@ export default class Analyzer {
 
   #generateResults(uri) {
     const rootURI = this.#getRootURI(uri);
+    const content = this.#contents.get(uri);
     if (!this.#options) {
       this.#initOptions(rootURI);
     }
 
     let results = [];
-    if (this.#options) {
-      this.#options.files = [rootURI];
-      results = markdownlint.sync(this.#options)[rootURI];
+    if (this.#options && content) {
+      this.#options.strings = { content };
+      results = markdownlint.sync(this.#options);
     }
 
     return results;
