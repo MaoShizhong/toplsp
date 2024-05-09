@@ -23,6 +23,7 @@ export default class Protocol {
     const uri = msg.params.textDocument.uri;
     const diagnostics = this.#analyzer.generateDiagnostics(uri);
     return {
+      id: msg.id,
       method: "textDocument/publishDiagnostics",
       params: { uri, diagnostics },
     };
@@ -64,7 +65,7 @@ export default class Protocol {
         hoverProvider: true,
         completionProvider: {},
       },
-      serverInfo: { name: "toplsp", version: "0.06" },
+      serverInfo: { name: "toplsp", version: "1.0" },
     };
 
     return {
