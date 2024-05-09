@@ -9,7 +9,6 @@
     "type": "git",
     "uri": "https://github.com/Mclilzee/toplsp"
   },
-  "main": "./client/out/extension",
   "scripts": {
     "test": "NODE_OPTIONS=\"$NODE_OPTIONS --experimental-vm-modules\" jest",
     "vscode:prepublish": "npm run esbuild-base -- --minify",
