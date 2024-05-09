@@ -4,16 +4,16 @@
   "publisher": "Mclilzee",
   "author": "Mclilzee",
   "license": "MIT",
+  "description": "TOP Lsp to work with .md files that is specific to https://theodinproject.com lessons",
   "repository": {
     "type": "git",
     "uri": "https://github.com/Mclilzee/toplsp"
   },
   "main": "./client/out/extension",
-  "description": "TOP Lsp to work with .md files that is specific to https://theodinproject.com lessons",
   "scripts": {
     "test": "NODE_OPTIONS=\"$NODE_OPTIONS --experimental-vm-modules\" jest",
     "vscode:prepublish": "npm run esbuild-base -- --minify",
-    "esbuild-base": "esbuild ./src/main.js --bundle --outfile=dist/extension.js --external:vscode --format=cjs --platform=node --main-fields=module,main",
+    "esbuild-base": "esbuild ./server/src/main.js --bundle --outfile=./server/out/extension.js --external:vscode --format=cjs --platform=node --main-fields=module,main",
     "esbuild": "npm run esbuild-base -- --sourcemap",
     "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch"
   },
