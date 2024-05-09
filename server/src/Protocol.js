@@ -64,7 +64,6 @@ export default class Protocol {
       capabilities: {
         codeActionProvider: true,
         textDocumentSync: 1,
-        hoverProvider: true,
         completionProvider: {},
       },
       serverInfo: { name: "toplsp", version: "1.0" },
