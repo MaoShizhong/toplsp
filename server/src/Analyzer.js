@@ -5,11 +5,11 @@ import fs from "fs";
 import CodeAction from "./CodeAction.js";
 
 export default class Analyzer {
-  #contents = new Map();
+  #document = new Map();
   #options = undefined;
 
   updateContent(uri, text) {
-    this.#contents.set(uri, text);
+    this.#document.set(uri, { text });
   }
 
   async #initOptions(uri) {
@@ -40,15 +40,16 @@ export default class Analyzer {
 
   #generateResults(uri) {
     const rootURI = this.#getRootURI(uri);
-    const content = this.#contents.get(uri);
+    const document = this.#document.get(uri);
     if (!this.#options) {
       this.#initOptions(rootURI);
     }
 
     let results = [];
-    if (this.#options && content) {
-      this.#options.strings = { content };
+    if (this.#options && document) {
+      this.#options.strings = { content: document.text };
       results = markdownlint.sync(this.#options).content;
+      document.results = results;
     }
 
     return results;
@@ -59,8 +60,9 @@ export default class Analyzer {
   }
 
   generateCodeActions(uri, range, diagnostics) {
-    return this.#generateResults(uri)
-      .filter((r) => this.#validActionResult(r, range))
+    return this.#document
+      .get(uri)
+      .results.filter((r) => this.#validActionResult(r, range))
       .map((r) => new CodeAction(r, uri, diagnostics));
   }
 
