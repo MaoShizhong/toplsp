@@ -1,0 +1,14 @@
+{
+  "name": "toplsp",
+  "version": "1.0.0",
+  "publisher": "Mclilzee",
+  "author": "Mclilzee",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "uri": "https://github.com/Mclilzee/toplsp"
+  },
+  "engines": {
+    "node": "*"
+  }
+}
