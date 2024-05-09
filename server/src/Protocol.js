@@ -58,7 +58,7 @@ export default class Protocol {
     const actions = this.#analyzer.generateCodeActions(uri, range, diagnostics);
     const response = {
       id: msg.id,
-      result: actions,
+      result: actions.length > 0 ? actions : null,
     };
 
     this.#respond(response);
