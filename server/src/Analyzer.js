@@ -17,45 +17,31 @@ export default class Analyzer {
   }
 
   async #initOptions(uri) {
-    const index = uri.indexOf("curriculum/");
-    if (index === -1) {
-      return;
-    }
-
-    const path = uri.slice(0, index + "curriculum/".length);
-
-    // Don't throw error, if file is not found then we are not in TOP repo. exit gracefully
-    let config;
-    try {
-      config = new String(fs.readFileSync(path + ".markdownlint-cli2.jsonc"));
-    } catch (_) {
-      return;
-    }
-
+    const rootPath = this.#getConfigurationPath(uri);
+    const configPath = rootPath + ".markdownlint-cli2.jsonc";
+    const config = fs.readFileSync(configPath).toString();
     const options = parse(config);
     const rulePromises = options.customRules.map(
-      (rule) => import(path + rule.slice(2)),
+      (r) => import(rootPath + r.slice(2)),
     );
 
-    options.customRules = await Promise.all(rulePromises);
-    options.customRules = options.customRules.map((rule) => rule.default);
+    const customRules = await Promise.all(rulePromises);
+    options.customRules = customRules.map((rule) => rule.default);
     this.#options = options;
   }
 
   #generateResults(uri) {
-    const rootURI = this.#getRootURI(uri);
-    const document = this.#document.get(uri);
     if (!this.#options) {
-      this.#initOptions(rootURI);
+      this.#initOptions(uri);
     }
 
+    const document = this.#document.get(uri);
     let results = [];
     if (this.#options && document) {
       this.#options.strings = { content: document.text };
       results = markdownlint.sync(this.#options).content;
       document.results = results;
     }
-
     return results;
   }
 
@@ -76,11 +62,12 @@ export default class Analyzer {
     return line >= start.line && line <= end.line && result.fixInfo;
   }
 
-  #getRootURI(uri) {
-    if (uri && uri.startsWith("file://")) {
-      return uri.slice("file://".length);
-    } else {
-      return uri;
+  #getConfigurationPath(uri) {
+    let startIndex = 0;
+    if (uri.startsWith("file://")) {
+      startIndex = "file://".length;
     }
+    const endIndex = uri.indexOf("curriculum/");
+    return uri.slice(startIndex, endIndex + "curriculum/".length);
   }
 }
