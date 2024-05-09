@@ -7,7 +7,7 @@ let client;
 export function activate(context) {
   // The server is implemented in node
   const serverModule = context.asAbsolutePath(
-    path.join("server", "out", "server.js"),
+    path.join("server", "out", "main.js"),
   );
 
   // If the extension is launched in debug mode then the debug server options are used
@@ -32,8 +32,8 @@ export function activate(context) {
 
   // Create the language client and start the client.
   client = new LanguageClient(
-    "REPLACE_ME language-server-id",
-    "REPLACE_ME language server name",
+    "toplsp",
+    "Top Language Server",
     serverOptions,
     clientOptions,
   );

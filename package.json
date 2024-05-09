@@ -12,7 +12,7 @@
   "scripts": {
     "test": "NODE_OPTIONS=\"$NODE_OPTIONS --experimental-vm-modules\" jest",
     "vscode:prepublish": "npm run esbuild",
-    "esbuild-server": "esbuild ./server/src/main.js --bundle --outfile=./server/out/extension.js --external:vscode --format=cjs --platform=node --main-fields=module,main",
+    "esbuild-server": "esbuild ./server/src/main.js --bundle --outfile=./server/out/main.js --external:vscode --format=cjs --platform=node --main-fields=module,main",
     "esbuild-client": "esbuild ./client/src/main.js --bundle --outfile=./client/out/extension.js --external:vscode --format=cjs --platform=node --main-fields=module,main",
     "esbuild": "npm run esbuild-server -- --minify && npm run esbuild-client -- --minify",
     "install-dependencies": "npm install && cd client && npm install && cd ../server && npm install && cd .."
