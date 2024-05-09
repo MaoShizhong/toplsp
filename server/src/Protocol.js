@@ -15,12 +15,14 @@ export default class Protocol {
     const text = msg.params.textDocument.text;
     const uri = msg.params.textDocument.uri;
     this.#analyzer.updateContent(uri, text);
+    this.#diagnosticsResponse(msg);
   }
 
   handleChange(msg) {
     const text = msg.params.contentChanges[0].text;
     const uri = msg.params.textDocument.uri;
     this.#analyzer.updateContent(uri, text);
+    this.#diagnosticsResponse(msg);
   }
 
   handleSave(msg) {
