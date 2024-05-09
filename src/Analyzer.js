@@ -13,15 +13,20 @@ export default class Analyzer {
   }
 
   async #initOptions(uri) {
-    const index = uri.indexOf("curriculum/.markdownlint-cli2.jsonc");
+    const index = uri.indexOf("curriculum/");
     if (index === -1) {
       return;
     }
 
-    const path = uri.slice(0, index + "curriculum/".length);
-    const config = new String(
-      fs.readFileSync(path + ".markdownlint-cli2.jsonc"),
-    );
+    // Don't throw error, if file is not found then we are not in TOP repo. exit gracefully
+    let config;
+    try {
+      const path = uri.slice(0, index + "curriculum/".length);
+      config = new String(fs.readFileSync(path + ".markdownlint-cli2.jsonc"));
+    } catch (_) {
+      return;
+    }
+
     const options = parse(config);
     const rulePromises = options.customRules.map(
       (rule) => import(path + rule.slice(2)),
