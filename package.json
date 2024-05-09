@@ -1,13 +1,14 @@
 {
+  "name": "toplsp",
+  "version": "1.0.0",
   "publisher": "Mclilzee",
   "author": "Mclilzee",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "uri": "https://github.com/Mclilzee/toplsp"
   },
   "main": "./client/out/extension",
-  "name": "toplsp",
-  "version": "1.0.0",
   "description": "TOP Lsp to work with .md files that is specific to https://theodinproject.com lessons",
   "scripts": {
     "test": "NODE_OPTIONS=\"$NODE_OPTIONS --experimental-vm-modules\" jest",
@@ -16,7 +17,6 @@
     "esbuild": "npm run esbuild-base -- --sourcemap",
     "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch"
   },
-  "license": "MIT",
   "devDependencies": {
     "esbuild": "^0.20.2",
     "jest": "^29.7.0"
