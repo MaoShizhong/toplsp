@@ -15,7 +15,7 @@
     "esbuild-server": "esbuild ./server/src/main.js --bundle --outfile=./server/out/extension.js --external:vscode --format=cjs --platform=node --main-fields=module,main",
     "esbuild-client": "esbuild ./client/src/main.js --bundle --outfile=./client/out/extension.js --external:vscode --format=cjs --platform=node --main-fields=module,main",
     "esbuild": "npm run esbuild-server -- --minify && npm run esbuild-client -- --minify",
-    "install-dependencies": "cd client && npm install && cd ../server && npm install && cd .."
+    "install-dependencies": "npm install && cd client && npm install && cd ../server && npm install && cd .."
   },
   "devDependencies": {
     "esbuild": "^0.20.2"
