@@ -8,6 +8,13 @@
     "type": "git",
     "uri": "https://github.com/Mclilzee/toplsp"
   },
+  "dependencies": {
+    "jsonc-parser": "^3.2.1",
+    "markdownlint": "^0.34.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
   "engines": {
     "node": "*"
   }

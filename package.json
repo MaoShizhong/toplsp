@@ -18,12 +18,7 @@
     "install-dependencies": "cd client && npm install && cd ../server && npm install && cd .."
   },
   "devDependencies": {
-    "esbuild": "^0.20.2",
-    "jest": "^29.7.0"
-  },
-  "dependencies": {
-    "jsonc-parser": "^3.2.1",
-    "markdownlint": "^0.34.0"
+    "esbuild": "^0.20.2"
   },
   "engines": {
     "vscode": "^1.8.0"
