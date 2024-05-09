@@ -18,10 +18,11 @@ export default class Analyzer {
       return;
     }
 
+    const path = uri.slice(0, index + "curriculum/".length);
+
     // Don't throw error, if file is not found then we are not in TOP repo. exit gracefully
     let config;
     try {
-      const path = uri.slice(0, index + "curriculum/".length);
       config = new String(fs.readFileSync(path + ".markdownlint-cli2.jsonc"));
     } catch (_) {
       return;
