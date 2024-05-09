@@ -49,7 +49,6 @@ export default class Analyzer {
     if (this.#options && content) {
       this.#options.strings = { content };
       results = markdownlint.sync(this.#options).content;
-      console.error(results);
     }
 
     return results;
