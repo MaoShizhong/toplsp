@@ -45,5 +45,5 @@ function handleMessage(msg) {
   }
 
   const encodedResponse = encoder.encode(response);
-  console.log(encodedResponse);
+  process.stdout.write(encodedResponse);
 }
