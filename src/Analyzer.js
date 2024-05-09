@@ -5,7 +5,12 @@ import fs from "fs";
 import CodeAction from "./CodeAction.js";
 
 export default class Analyzer {
+  #contents = new Map();
   #options = undefined;
+
+  updateContent(uri, text) {
+    this.#contents.set(uri, text);
+  }
 
   async #initOptions(uri) {
     const index = uri.indexOf("curriculum/");

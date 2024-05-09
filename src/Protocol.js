@@ -8,10 +8,16 @@ export default class Protocol {
   }
 
   openResponse(msg) {
+    const text = msg.params.textDocument.text;
+    const uri = msg.params.textDocument.uri;
+    this.#analyzer.updateContent(uri, text);
     return this.#diagnosticsResponse(msg);
   }
 
   changeResponse(msg) {
+    const text = msg.params.contentChanges[0].text;
+    const uri = msg.params.textDocument.uri;
+    this.#analyzer.updateContent(uri, text);
     return this.#diagnosticsResponse(msg);
   }
 
