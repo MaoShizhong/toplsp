@@ -29,9 +29,6 @@ function handleMessage(msg) {
     case "textDocument/didChange":
       protocol.handleChange(msg);
       break;
-    case "textDocument/hover":
-      protocol.handleHover(msg);
-      break;
     case "textDocument/completion":
       protocol.handleCompletion(msg);
       break;

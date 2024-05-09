@@ -46,21 +46,6 @@ export default class Protocol {
     this.#respond(response);
   }
 
-  handleHover(msg) {
-    const uri = msg.params.textDocument.uri;
-    const { line } = msg.params.position;
-    const content = this.#analyzer.getContent(uri);
-    const contents = content.split("\n")[line];
-    const response = {
-      id: msg.id,
-      result: {
-        contents,
-      },
-    };
-
-    this.#respond(response);
-  }
-
   handleCodeAction(msg) {
     const uri = msg.params.textDocument.uri;
     const range = msg.params.range;
