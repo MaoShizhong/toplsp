@@ -1,0 +1,18 @@
+{
+  "name": "toplsp",
+  "version": "1.0",
+  "publisher": "Mclilzee",
+  "author": "Mclilzee",
+  "description": "TOP Lsp to work with .md files that is specific to https://theodinproject.com lessons",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "uri": "https://github.com/Mclilzee/toplsp"
+  },
+  "engines": {
+    "vscode": "^1.8.0"
+  },
+  "dependencies": {
+    "vscode-languageclient": "^8.1.0"
+  }
+}
