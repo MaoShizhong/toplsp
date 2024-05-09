@@ -1,14 +1,14 @@
 import fs from "fs";
 
-const log = fs.createWriteStream("/tmp/lsp.log");
+const logger = fs.createWriteStream("/tmp/lsp.log");
 
 export default {
   log: (msg) => {
     if (typeof msg === "object") {
-      log.write(JSON.stringify(msg));
+      logger.write(JSON.stringify(msg));
     } else {
-      log.write(msg);
+      logger.write(msg);
     }
-    log.write("\n");
+    logger.write("\n");
   },
 };

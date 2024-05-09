@@ -2,68 +2,77 @@ import completions from "./completions/index.js";
 
 export default class Protocol {
   #analyzer;
+  #encoder;
+  #logger;
 
-  constructor(analyzer) {
+  constructor(analyzer, encoder, logger) {
     this.#analyzer = analyzer;
+    this.#encoder = encoder;
+    this.#logger = logger;
   }
 
-  openResponse(msg) {
+  handleOpen(msg) {
     const text = msg.params.textDocument.text;
     const uri = msg.params.textDocument.uri;
     this.#analyzer.updateContent(uri, text);
-    return this.#diagnosticsResponse(msg);
   }
 
-  changeResponse(msg) {
+  handleChange(msg) {
     const text = msg.params.contentChanges[0].text;
     const uri = msg.params.textDocument.uri;
     this.#analyzer.updateContent(uri, text);
-    return this.#diagnosticsResponse(msg);
   }
 
-  saveResponse(msg) {
-    return this.#diagnosticsResponse(msg);
+  handleSave(msg) {
+    this.#diagnosticsResponse(msg);
   }
 
   #diagnosticsResponse(msg) {
     const uri = msg.params.textDocument.uri;
     const diagnostics = this.#analyzer.generateDiagnostics(uri);
-    return {
+    const response = {
       id: msg.id,
       method: "textDocument/publishDiagnostics",
       params: { uri, diagnostics },
     };
+
+    this.#respond(response);
   }
 
-  completionResponse(msg) {
-    return { id: msg.id, result: completions };
+  handleCompletion(msg) {
+    const response = { id: msg.id, result: completions };
+    this.#respond(response);
   }
 
-  hoverResponse(msg) {
+  handleHover(msg) {
     const uri = msg.params.textDocument.uri;
     const { line } = msg.params.position;
     const content = this.#analyzer.getContent(uri);
     const contents = content.split("\n")[line];
-    return {
+    const response = {
       id: msg.id,
       result: {
         contents,
       },
     };
+
+    this.#respond(response);
   }
 
-  codeActionResponse(msg) {
+  handleCodeAction(msg) {
     const uri = msg.params.textDocument.uri;
     const range = msg.params.range;
     const diagnostics = msg.params.context.diagnostics;
     const actions = this.#analyzer.generateCodeActions(uri, range, diagnostics);
-    return {
+    const response = {
       id: msg.id,
       result: actions,
     };
+
+    this.#respond(response);
   }
 
-  initalizationResponse(msg) {
+  handleInitialization(msg) {
     const initalizeResponse = {
       capabilities: {
         codeActionProvider: true,
@@ -74,9 +83,17 @@ export default class Protocol {
       serverInfo: { name: "toplsp", version: "1.0" },
     };
 
-    return {
+    const response = {
       id: msg.id,
       result: initalizeResponse,
     };
+
+    this.#respond(response);
+  }
+
+  #respond(response) {
+    const encodedResponse = this.#encoder.encode(response);
+    this.#logger.log("Response -> " + encodedResponse);
+    process.stdout.write(encodedResponse);
   }
 }

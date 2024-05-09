@@ -1,10 +1,11 @@
 import Analyzer from "./Analyzer.js";
 import Encoder from "./Encoder.js";
 import Protocol from "./Protocol.js";
+import logger from "./logger.js";
 
 const encoder = new Encoder();
 const analyzer = new Analyzer();
-const protocol = new Protocol(analyzer);
+const protocol = new Protocol(analyzer, encoder, logger);
 
 process.stdin.on("data", (data) => {
   try {
@@ -17,33 +18,28 @@ process.stdin.on("data", (data) => {
 
 function handleMessage(msg) {
   const { method } = msg;
-  let response;
+  logger.log("Method -> " + method);
   switch (method) {
     case "initialize":
-      response = protocol.initalizationResponse(msg);
+      protocol.handleInitialization(msg);
       break;
     case "textDocument/didOpen":
-      response = protocol.openResponse(msg);
+      protocol.handleOpen(msg);
       break;
     case "textDocument/didChange":
-      response = protocol.changeResponse(msg);
+      protocol.handleChange(msg);
       break;
     case "textDocument/hover":
-      response = protocol.handleHover(msg);
+      protocol.handleHover(msg);
       break;
     case "textDocument/completion":
-      response = protocol.completionResponse(msg);
+      protocol.handleCompletion(msg);
       break;
     case "textDocument/didSave":
-      response = protocol.saveResponse(msg);
+      protocol.handleSave(msg);
       break;
     case "textDocument/codeAction":
-      response = protocol.codeActionResponse(msg);
+      protocol.handleCodeAction(msg);
       break;
-    case "initialized":
-      return;
   }
-
-  const encodedResponse = encoder.encode(response);
-  process.stdout.write(encodedResponse);
 }
