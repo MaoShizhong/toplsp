@@ -68,10 +68,7 @@ export default class Protocol {
     const initalizeResponse = {
       capabilities: {
         codeActionProvider: true,
-        textDocumentSync: {
-          openClose: true,
-          change: 1,
-        },
+        textDocumentSync: 1,
         completionProvider: {},
       },
       serverInfo: { name: "toplsp", version: "1.0" },
