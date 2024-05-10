@@ -17,7 +17,7 @@ export default class Analyzer {
   }
 
   async initOptions(uri) {
-    // Wrap in catch incase not working from TOP directory, exit gracefuly
+    // Wrap in try catch incase not working from TOP directory, exit gracefuly
     let config;
     let rootPath;
     try {
