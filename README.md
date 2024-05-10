@@ -8,7 +8,7 @@ TOP LSP Can be found in the marketplace of VSCode.
 
 ### Nvim
 
-1. Clone the repo `git clone git@github:Mclilzee/toplsp.git`
+1. Clone the repo `git clone git@github.com:Mclilzee/toplsp.git`
 2. Install packages `npm run install-dependencies`
 3. Build `npm run esbuild`
 4. Put the path of `./server/out/main.js` to be launched from Nvim, in config autcommand:
