@@ -1,21 +1,38 @@
 export default class Encoder {
-  encode(msg) {
-    if (msg == undefined || msg.length === 0) {
+  #decoderCache = "";
+
+  encode(request) {
+    if (request == undefined || request.length === 0) {
       return `Content-Length 0`;
     }
-    const json = JSON.stringify(msg);
+    const json = JSON.stringify(request);
 
     return `Content-Length: ${json.length}\r\n\r\n${json}`;
   }
 
-  decode(msg) {
+  decode(request) {
+    this.#decoderCache += request;
     const startIndex = "Content-Length ".length;
+    const lastIndex = this.#decoderCache.indexOf("\r\n\r\n");
+    const length = Number(this.#decoderCache.substring(startIndex, lastIndex));
 
-    const lastIndex = msg.indexOf("\r\n\r\n");
-    const length = Number(msg.substring(startIndex, lastIndex));
+    const bodyStartIndex = this.#decoderCache.indexOf("{");
 
-    const obStart = lastIndex + "\r\n\r\n".length;
-    const obj = msg.substring(obStart, obStart + length);
-    return JSON.parse(obj);
+    if (bodyStartIndex === -1) {
+      return null;
+    }
+
+    const requestBody = this.#decoderCache.substring(
+      bodyStartIndex,
+      bodyStartIndex + length,
+    );
+
+    if (length > requestBody.length) {
+      return null;
+    }
+
+    console.log(requestBody);
+    this.#decoderCache = this.#decoderCache.substring(bodyStartIndex + length);
+    return JSON.parse(requestBody);
   }
 }

@@ -1,8 +1,11 @@
 import Encoder from "../Encoder.js";
 
-const encoder = new Encoder();
-
 describe("Decode properly", () => {
+  let encoder;
+  beforeEach(() => {
+    encoder = new Encoder();
+  });
+
   test("Decode empty object", () => {
     const str = "Content-Length 2\r\n\r\n{}";
     const result = encoder.decode(str);
@@ -36,9 +39,19 @@ describe("Decode properly", () => {
     const str = 'Cent-Length 14\r\n\r\n{"name":"Joe"}other things goes here';
     expect(() => encoder.decode(str)).toThrow();
   });
+
+  test("Decode in stages", () => {
+    const str = "Content-length 14\r\n\r\n";
+    expect(encoder.decode(str)).toBe(null);
+  });
 });
 
 describe("Encode properly", () => {
+  let encoder;
+  beforeEach(() => {
+    encoder = new Encoder();
+  });
+
   test("Encode correct length", () => {
     const ob = { hello: "World", thiskey: 22 };
     const result = encoder.encode(ob);
