@@ -7,11 +7,11 @@ const encoder = new Encoder();
 const analyzer = new Analyzer();
 const protocol = new Protocol(analyzer, encoder, logger);
 
-process.stdin.on("data", (data) => {
+process.stdin.on("data", (request) => {
   try {
-    const request = encoder.decode(data.toString());
     logger.log("Request -> " + request);
-    handleMessage(request);
+    const requestObj = encoder.decode(request.toString());
+    handleMessage(requestObj);
   } catch (e) {
     console.error(e);
   }
