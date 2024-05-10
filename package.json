@@ -9,6 +9,7 @@
     "type": "git",
     "uri": "https://github.com/Mclilzee/toplsp"
   },
+  "icon": "topicon.png",
   "scripts": {
     "test": "cd server && npm run test && cd ..",
     "vscode:prepublish": "npm run esbuild",
