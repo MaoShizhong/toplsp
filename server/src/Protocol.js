@@ -11,34 +11,34 @@ export default class Protocol {
     this.#logger = logger;
   }
 
-  handleOpen(msg) {
-    const text = msg.params.textDocument.text;
-    const uri = msg.params.textDocument.uri;
+  handleOpen(request) {
+    const text = request.params.textDocument.text;
+    const uri = request.params.textDocument.uri;
     this.#analyzer.updateContent(uri, text);
-    this.#diagnosticsResponse(msg);
+    this.#diagnosticsResponse(request);
   }
 
-  handleChange(msg) {
-    const text = msg.params.contentChanges[0].text;
-    const uri = msg.params.textDocument.uri;
+  handleChange(request) {
+    const text = request.params.contentChanges[0].text;
+    const uri = request.params.textDocument.uri;
     this.#analyzer.updateContent(uri, text);
-    this.#diagnosticsResponse(msg);
+    this.#diagnosticsResponse(request);
   }
 
-  handleSave(msg) {
-    this.#diagnosticsResponse(msg);
+  handleSave(request) {
+    this.#diagnosticsResponse(request);
   }
 
-  handleClose(msg) {
-    const uri = msg.params.textDocument.uri;
+  handleClose(request) {
+    const uri = request.params.textDocument.uri;
     this.#analyzer.remove(uri);
   }
 
-  #diagnosticsResponse(msg) {
-    const uri = msg.params.textDocument.uri;
+  #diagnosticsResponse(request) {
+    const uri = request.params.textDocument.uri;
     const diagnostics = this.#analyzer.generateDiagnostics(uri);
     const response = {
-      id: msg.id,
+      id: request.id,
       method: "textDocument/publishDiagnostics",
       params: { uri, diagnostics },
     };
@@ -46,25 +46,25 @@ export default class Protocol {
     this.#respond(response);
   }
 
-  handleCompletion(msg) {
-    const response = { id: msg.id, result: completions };
+  handleCompletion(request) {
+    const response = { id: request.id, result: completions };
     this.#respond(response);
   }
 
-  handleCodeAction(msg) {
-    const uri = msg.params.textDocument.uri;
-    const range = msg.params.range;
-    const diagnostics = msg.params.context.diagnostics;
+  handleCodeAction(request) {
+    const uri = request.params.textDocument.uri;
+    const range = request.params.range;
+    const diagnostics = request.params.context.diagnostics;
     const actions = this.#analyzer.generateCodeActions(uri, range, diagnostics);
     const response = {
-      id: msg.id,
+      id: request.id,
       result: actions.length > 0 ? actions : null,
     };
 
     this.#respond(response);
   }
 
-  handleInitialization(msg) {
+  handleInitialization(request) {
     const initalizeResponse = {
       capabilities: {
         codeActionProvider: true,
@@ -75,7 +75,7 @@ export default class Protocol {
     };
 
     const response = {
-      id: msg.id,
+      id: request.id,
       result: initalizeResponse,
     };
 

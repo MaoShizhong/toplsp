@@ -9,37 +9,37 @@ const protocol = new Protocol(analyzer, encoder, logger);
 
 process.stdin.on("data", (data) => {
   try {
-    const msg = encoder.decode(data.toString());
-    handleMessage(msg);
+    const request = encoder.decode(data.toString());
+    logger.log("Request -> " + request);
+    handleMessage(request);
   } catch (e) {
     console.error(e);
   }
 });
 
-function handleMessage(msg) {
-  const { method } = msg;
-  logger.log("Method -> " + method);
+function handleMessage(request) {
+  const { method } = request;
   switch (method) {
     case "initialize":
-      protocol.handleInitialization(msg);
+      protocol.handleInitialization(request);
       break;
     case "textDocument/didOpen":
-      protocol.handleOpen(msg);
+      protocol.handleOpen(request);
       break;
     case "textDocument/didChange":
-      protocol.handleChange(msg);
+      protocol.handleChange(request);
       break;
     case "textDocument/didSave":
-      protocol.handleSave(msg);
+      protocol.handleSave(request);
       break;
     case "textDocument/didClose":
-      protocol.handleClose(msg);
+      protocol.handleClose(request);
       break;
     case "textDocument/completion":
-      protocol.handleCompletion(msg);
+      protocol.handleCompletion(request);
       break;
     case "textDocument/codeAction":
-      protocol.handleCodeAction(msg);
+      protocol.handleCodeAction(request);
       break;
   }
 }
