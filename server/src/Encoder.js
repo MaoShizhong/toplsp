@@ -17,7 +17,6 @@ export default class Encoder {
     const length = Number(this.#decoderCache.substring(startIndex, lastIndex));
 
     const bodyStartIndex = this.#decoderCache.indexOf("{");
-
     if (bodyStartIndex === -1) {
       return null;
     }
