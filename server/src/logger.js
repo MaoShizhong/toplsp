@@ -9,6 +9,6 @@ export default {
       str = JSON.stringify(msg);
     }
 
-    logger.write(header + " --> " + str + "\n");
+    logger.write(header + " --> " + str + "\n---------------------\n\n");
   },
 };
