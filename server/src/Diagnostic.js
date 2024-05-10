@@ -6,16 +6,34 @@ export default class Diagnostic {
         character: 0,
       },
       end: {
-        character: 999,
+        character: 9999,
         line: result.lineNumber - 1,
       },
     };
 
+    this.message = result.ruleDescription;
     this.sevirity = 3;
-    this.codeDescription = { href: result.ruleInformation };
     this.source = "toplsp";
-    this.message = result.errorDetail;
     this.code = result.ruleNames[0];
+
+    if (result.errorRange) {
+      const { start, end } = this.range;
+      start.character = result.errorRange[0] - 1;
+      end.character = start.character + result.errorRange[1];
+    }
+
+    if (result.ruleInformation) {
+      this.codeDescription = { href: result.ruleInformation };
+    }
+
+    if (result.errorInformation) {
+      this.codeDescription = { href: result.errorInformation };
+    }
+
+    if (result.errorDetail) {
+      this.message += "\n" + result.errorDetail;
+    }
+
     return this;
   }
 }
