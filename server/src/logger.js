@@ -3,12 +3,12 @@ import fs from "fs";
 const logger = fs.createWriteStream("/tmp/toplsp.log");
 
 export default {
-  log: (msg) => {
+  log: (header, msg) => {
+    let str = msg;
     if (typeof msg === "object") {
-      logger.write(JSON.stringify(msg));
-    } else {
-      logger.write(msg);
+      str = JSON.stringify(msg);
     }
-    logger.write("\n");
+
+    logger.write(header + " --> " + str + "\n");
   },
 };

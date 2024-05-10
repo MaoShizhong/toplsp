@@ -86,6 +86,6 @@ export default class Protocol {
   #respond(response) {
     const encodedResponse = this.#encoder.encode(response);
     process.stdout.write(encodedResponse);
-    this.#logger.log("Response -> " + encodedResponse);
+    this.#logger.log("Response", encodedResponse);
   }
 }

@@ -12,7 +12,7 @@ process.stdin.on("data", (data) => {
     const request = encoder.decode(data);
     if (request) {
       handleMessage(request);
-      logger.log("Request -> " + request);
+      logger.log("Request", request);
     }
   } catch (e) {
     console.error(e);
