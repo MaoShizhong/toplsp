@@ -10,7 +10,7 @@
     "uri": "https://github.com/Mclilzee/toplsp"
   },
   "scripts": {
-    "test": "NODE_OPTIONS=\"$NODE_OPTIONS --experimental-vm-modules\" jest",
+    "test": "cd server && npm run test && cd ..",
     "vscode:prepublish": "npm run esbuild",
     "esbuild-server": "esbuild ./server/src/main.js --bundle --outfile=./server/out/main.js --external:vscode --format=cjs --platform=node --main-fields=module,main",
     "esbuild-client": "esbuild ./client/src/main.js --bundle --outfile=./client/out/extension.js --external:vscode --format=cjs --platform=node --main-fields=module,main",
@@ -22,6 +22,7 @@
   },
   "main": "./client/out/extension.js",
   "activationEvents": [
+    "onLanguage:markdown",
     "workspaceContains:**/curriculum/.markdownlint-cli2.jsonc"
   ],
   "engines": {

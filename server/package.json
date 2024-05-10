@@ -8,6 +8,10 @@
     "type": "git",
     "uri": "https://github.com/Mclilzee/toplsp"
   },
+  "type": "module",
+  "scripts": {
+    "test": "NODE_OPTIONS=\"$NODE_OPTIONS --experimental-vm-modules\" npx jest"
+  },
   "dependencies": {
     "jsonc-parser": "^3.2.1",
     "markdownlint": "^0.34.0"
