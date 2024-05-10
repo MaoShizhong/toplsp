@@ -17,9 +17,17 @@ export default class Analyzer {
   }
 
   async initOptions(uri) {
-    const rootPath = this.#getConfigurationPath(uri);
-    const configPath = rootPath + ".markdownlint-cli2.jsonc";
-    const config = fs.readFileSync(configPath).toString();
+    // Wrap in catch incase not working from TOP directory, exit gracefuly
+    let config;
+    let rootPath;
+    try {
+      rootPath = this.#getConfigurationPath(uri);
+      const configPath = rootPath + ".markdownlint-cli2.jsonc";
+      config = fs.readFileSync(configPath).toString();
+    } catch (_) {
+      return;
+    }
+
     const options = parse(config);
     const rulePromises = options.customRules.map(
       (r) => import(rootPath + r.slice(2)),
