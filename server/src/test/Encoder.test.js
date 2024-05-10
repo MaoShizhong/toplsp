@@ -41,8 +41,20 @@ describe("Decode properly", () => {
   });
 
   test("Decode in stages", () => {
-    const str = "Content-length 14\r\n\r\n";
+    let str = "Content-length 78\r\n\r\n";
     expect(encoder.decode(str)).toBe(null);
+    str = '{"nested":[{"man":"woman"}],"thiskey":2';
+    expect(encoder.decode(str)).toBe(null);
+    str = '3,"another":{"nested":{"object":true}}}Content-length 14\r';
+    expect(encoder.decode(str)).toEqual({
+      nested: [{ man: "woman" }],
+      thiskey: 23,
+      another: { nested: { object: true } },
+    });
+    str = "\n\r\n{";
+    expect(encoder.decode(str)).toBe(null);
+    str = '"name":"Joe"}';
+    expect(encoder.decode(str)).toEqual({ name: "Joe" });
   });
 });
 
