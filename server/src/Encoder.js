@@ -30,7 +30,6 @@ export default class Encoder {
       return null;
     }
 
-    console.log(requestBody);
     this.#decoderCache = this.#decoderCache.substring(bodyStartIndex + length);
     return JSON.parse(requestBody);
   }
