@@ -9,11 +9,11 @@ const protocol = new Protocol(analyzer, encoder, logger);
 
 process.stdin.on("data", (data) => {
   try {
-    const request = data.toString();
-
-    logger.log("Request -> " + request);
-    const requestObj = encoder.decode(request);
-    handleMessage(requestObj);
+    const request = encoder.decode(data);
+    if (request) {
+      handleMessage(request);
+      logger.log("Request -> " + request);
+    }
   } catch (e) {
     console.error(e);
   }
