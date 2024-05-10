@@ -11,9 +11,10 @@ export default class Protocol {
     this.#logger = logger;
   }
 
-  handleOpen(request) {
+  async handleOpen(request) {
     const text = request.params.textDocument.text;
     const uri = request.params.textDocument.uri;
+    await this.#analyzer.initOptions(uri);
     this.#analyzer.updateContent(uri, text);
     this.#diagnosticsResponse(request);
   }

@@ -16,7 +16,7 @@ export default class Analyzer {
     this.#document.delete(uri);
   }
 
-  async #initOptions(uri) {
+  async initOptions(uri) {
     const rootPath = this.#getConfigurationPath(uri);
     const configPath = rootPath + ".markdownlint-cli2.jsonc";
     const config = fs.readFileSync(configPath).toString();
@@ -31,10 +31,6 @@ export default class Analyzer {
   }
 
   #generateResults(uri) {
-    if (!this.#options) {
-      this.#initOptions(uri);
-    }
-
     const document = this.#document.get(uri);
     let results = [];
     if (this.#options && document) {
