@@ -1,7 +1,5 @@
 import Diagnostic from "./Diagnostic.js";
-import { parse } from "jsonc-parser";
 import markdownlint from "markdownlint";
-import fs from "fs";
 import CodeAction from "./CodeAction.js";
 
 export default class Analyzer {

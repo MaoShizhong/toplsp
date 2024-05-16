@@ -10,9 +10,9 @@ export default class Markdown {
     let configDirectory;
     try {
       configDirectory = this.#getConfigDirectory(uri);
-      baseConfig = this.#getBaseConfig(configDirectory);
-      projectConfig = this.#getProjectConfig(configDirectory);
-      lessonConfig = this.#getLessonConfig(configDirectory);
+      baseConfig = this.#readBaseConfig(configDirectory);
+      projectConfig = this.#readProjectConfig(configDirectory);
+      lessonConfig = this.#readLessonConfig(configDirectory);
     } catch (_) {
       return;
     }
@@ -32,17 +32,25 @@ export default class Markdown {
     this.#lessonConfig.extends = options;
   }
 
-  #getBaseConfig(configDirectory) {
+  getLessonConfig() {
+    return this.#lessonConfig;
+  }
+
+  getProjectConfig() {
+    return this.#projectConfig;
+  }
+
+  #readBaseConfig(configDirectory) {
     const path = `${configDirectory}.markdownlint-cli2.jsonc`;
     return fs.readFileSync(path).toString();
   }
 
-  #getProjectConfig(configDirectory) {
+  #readProjectConfig(configDirectory) {
     const path = `${configDirectory}project.markdownlint-cli2.jsonc`;
     return fs.readFileSync(path).toString();
   }
 
-  #getLessonConfig(configDirectory) {
+  #readLessonConfig(configDirectory) {
     const path = `${configDirectory}lesson.markdownlint-cli2.jsonc`;
     return fs.readFileSync(path).toString();
   }
