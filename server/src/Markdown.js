@@ -1,5 +1,4 @@
 export default class Markdown {
-  #baseConfig;
   #projectConfig;
   #lessonConfig;
 
@@ -25,7 +24,12 @@ export default class Markdown {
 
     const customRules = await Promise.all(rulePromises);
     options.customRules = customRules.map((rule) => rule.default);
-    this.#baseConfig = options;
+
+    this.#projectConfig = parse(projectConfig);
+    this.#projectConfig.extends = options;
+
+    this.#lessonConfig = parse(lessonConfig);
+    this.#lessonConfig.extends = options;
   }
 
   #getBaseConfig(configDirectory) {
