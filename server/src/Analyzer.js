@@ -7,6 +7,9 @@ export default class Analyzer {
   #document = new Map();
   #markdownConfig = new Markdown();
 
+  async initConfigs(uri) {
+    await this.#markdownConfig.initOptions(uri);
+  }
   updateContent(uri, text) {
     this.#document.set(uri, { text });
   }

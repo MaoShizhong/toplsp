@@ -14,7 +14,7 @@ export default class Protocol {
   async handleOpen(request) {
     const text = request.params.textDocument.text;
     const uri = request.params.textDocument.uri;
-    await this.#analyzer.initOptions(uri);
+    await this.#analyzer.initConfigs(uri);
     this.#analyzer.updateContent(uri, text);
     this.#diagnosticsResponse(request);
   }
