@@ -53,7 +53,7 @@ export default class MarkdownConfig {
     };
     Object.entries(config)
       .filter(([key, _]) => key !== "extends")
-      .forEach(([key, value]) => (mergedConfig[key] = value));
+      .forEach(([key, value]) => (mergedConfig.config[key] = value));
 
     return mergedConfig;
   }
