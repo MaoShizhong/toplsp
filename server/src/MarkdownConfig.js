@@ -49,7 +49,7 @@ export default class MarkdownConfig {
     const config = parse(configContent).config;
     const mergedConfig = {
       config: { ...options.config },
-      customeRules: { ...options.customRules },
+      customRules: [...options.customRules],
     };
     Object.entries(config)
       .filter(([key, _]) => key !== "extends")
