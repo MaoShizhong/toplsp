@@ -6,7 +6,7 @@ export default class Markdown {
   #lessonConfig;
 
   getOptions(uri) {
-    if (uri.contains("project")) {
+    if (uri.includes("project_")) {
       return this.#projectConfig;
     } else {
       return this.#lessonConfig;
@@ -27,8 +27,8 @@ export default class Markdown {
       const customRules = await Promise.all(rulePromises);
       options.customRules = customRules.map((rule) => rule.default);
 
-      this.#initProjectConfig(options);
-      this.#initLessonConfig(options);
+      this.#initProjectConfig(options, configDirectory);
+      this.#initLessonConfig(options, configDirectory);
     } catch (_) {
       return;
     }
@@ -36,22 +36,27 @@ export default class Markdown {
 
   #initProjectConfig(options, configDirectory) {
     const path = `${configDirectory}project.markdownlint-cli2.jsonc`;
-    const configContent = fs.readFileSync(path).toString();
-    const config = parse(configContent);
-    this.#projectConfig = options;
-    Object.entries(config)
-      .filter((key) => key !== "extends")
-      .forEach((key, value) => (this.#projectConfig[key] = value));
+    this.#projectConfig = this.#mergeConfig(options, path);
   }
 
   #initLessonConfig(options, configDirectory) {
     const path = `${configDirectory}lesson.markdownlint-cli2.jsonc`;
+    this.#lessonConfig = this.#mergeConfig(options, path);
+  }
+
+  #mergeConfig(options, path) {
     const configContent = fs.readFileSync(path).toString();
-    const config = parse(configContent);
-    this.#lessonConfig = options;
+    const config = parse(configContent).config;
+    const mergedConfig = {
+      config: { ...options.config },
+      customeRules: { ...options.customeRules },
+    };
     Object.entries(config)
-      .filter((key) => key !== "extends")
-      .forEach((key, value) => (this.#lessonConfig[key] = value));
+      .filter(([key, _]) => key !== "extends")
+      .forEach(([key, value]) => (mergedConfig[key] = value));
+
+    console.error(mergedConfig);
+    return mergedConfig;
   }
 
   #readBaseConfig(configDirectory) {
