@@ -1,11 +1,11 @@
 import Diagnostic from "./Diagnostic.js";
 import markdownlint from "markdownlint";
 import CodeAction from "./CodeAction.js";
-import Markdown from "./Markdown.js";
+import MarkdownConfig from "./MarkdownConfig.js";
 
 export default class Analyzer {
   #document = new Map();
-  #markdownConfig = new Markdown();
+  #markdownConfig = new MarkdownConfig();
 
   async initConfigs(uri) {
     await this.#markdownConfig.initOptions(uri);

@@ -1,7 +1,7 @@
 import { parse } from "jsonc-parser";
 import fs from "fs";
 
-export default class Markdown {
+export default class MarkdownConfig {
   #projectConfig;
   #lessonConfig;
 
