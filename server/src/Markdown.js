@@ -32,12 +32,12 @@ export default class Markdown {
     this.#lessonConfig.extends = options;
   }
 
-  getLessonConfig() {
-    return this.#lessonConfig;
-  }
-
-  getProjectConfig() {
-    return this.#projectConfig;
+  getOptions(uri) {
+    if (uri.contains("project")) {
+      return this.#projectConfig;
+    } else {
+      return this.#lessonConfig;
+    }
   }
 
   #readBaseConfig(configDirectory) {

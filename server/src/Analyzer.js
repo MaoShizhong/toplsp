@@ -1,10 +1,11 @@
 import Diagnostic from "./Diagnostic.js";
 import markdownlint from "markdownlint";
 import CodeAction from "./CodeAction.js";
+import Markdown from "./Markdown.js";
 
 export default class Analyzer {
   #document = new Map();
-  #options = undefined;
+  #markdownConfig = new Markdown();
 
   updateContent(uri, text) {
     this.#document.set(uri, { text });
@@ -17,9 +18,10 @@ export default class Analyzer {
   #generateResults(uri) {
     const document = this.#document.get(uri);
     let results = [];
-    if (this.#options && document) {
-      this.#options.strings = { content: document.text };
-      results = markdownlint.sync(this.#options).content;
+    let options = this.#markdownConfig.getOptions(uri);
+    if (options && document) {
+      options.strings = { content: document.text };
+      results = markdownlint.sync(options).content;
       document.results = results;
     }
     return results;
