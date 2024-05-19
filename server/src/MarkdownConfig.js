@@ -14,6 +14,9 @@ export default class MarkdownConfig {
   }
 
   async initOptions(uri) {
+    if (this.#projectConfig && this.#lessonConfig) {
+      return;
+    }
     // Wrap in try catch incase not working from TOP directory, exit gracefuly
     try {
       const configDirectory = this.#getConfigDirectory(uri);
