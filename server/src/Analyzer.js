@@ -10,6 +10,7 @@ export default class Analyzer {
   async initConfigs(uri) {
     await this.#markdownConfig.initOptions(uri);
   }
+
   updateContent(uri, text) {
     this.#document.set(uri, { text });
   }
