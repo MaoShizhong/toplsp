@@ -3,12 +3,10 @@ import completions from "./completions/index.js";
 export default class Protocol {
   #analyzer;
   #encoder;
-  #logger;
 
   constructor(analyzer, encoder, logger) {
     this.#analyzer = analyzer;
     this.#encoder = encoder;
-    this.#logger = logger;
   }
 
   async handleOpen(request) {
@@ -86,6 +84,5 @@ export default class Protocol {
   #respond(response) {
     const encodedResponse = this.#encoder.encode(response);
     process.stdout.write(encodedResponse);
-    this.#logger.log("Response", encodedResponse);
   }
 }

@@ -5,3 +5,4 @@
 ## 1.1.1
 
 - Cache config initialization for better performance
+- Remove logger

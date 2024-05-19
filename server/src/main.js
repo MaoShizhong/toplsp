@@ -1,18 +1,16 @@
 import Analyzer from "./Analyzer.js";
 import Encoder from "./Encoder.js";
 import Protocol from "./Protocol.js";
-import logger from "./logger.js";
 
 const encoder = new Encoder();
 const analyzer = new Analyzer();
-const protocol = new Protocol(analyzer, encoder, logger);
+const protocol = new Protocol(analyzer, encoder);
 
 process.stdin.on("data", (data) => {
   try {
     const request = encoder.decode(data);
     if (request) {
       handleMessage(request);
-      logger.log("Request", request);
     }
   } catch (e) {
     console.error(e);
