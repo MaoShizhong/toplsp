@@ -73,9 +73,4 @@ export default class Protocol {
       result: initalizeResponse,
     };
   }
-
-  #respond(response) {
-    const encodedResponse = this.#encoder.encode(response);
-    process.stdout.write(encodedResponse);
-  }
 }

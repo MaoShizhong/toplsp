@@ -17,29 +17,35 @@ process.stdin.on("data", (data) => {
   }
 });
 
-function handleMessage(request) {
+async function handleMessage(request) {
   const { method } = request;
+  let response;
   switch (method) {
     case "initialize":
-      protocol.handleInitialization(request);
+      response = protocol.initializationResponse(request);
       break;
     case "textDocument/didOpen":
-      protocol.handleOpen(request);
+      response = await protocol.openResponse(request);
       break;
     case "textDocument/didChange":
-      protocol.handleChange(request);
+      response = protocol.changeResponse(request);
       break;
     case "textDocument/didSave":
-      protocol.handleSave(request);
+      response = protocol.saveResponse(request);
       break;
     case "textDocument/didClose":
-      protocol.handleClose(request);
+      response = protocol.closeResponse(request);
       break;
     case "textDocument/completion":
-      protocol.handleCompletion(request);
+      response = protocol.complectionResponse(request);
       break;
     case "textDocument/codeAction":
-      protocol.handleCodeAction(request);
+      response = protocol.codeActionResponse(request);
       break;
+  }
+
+  if (response) {
+    const encodedResponse = encoder.encode(response);
+    process.stdout.write(encodedResponse);
   }
 }
