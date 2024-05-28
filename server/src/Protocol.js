@@ -9,26 +9,26 @@ export default class Protocol {
     this.#encoder = encoder;
   }
 
-  async handleOpen(request) {
+  async openResponse(request) {
     const text = request.params.textDocument.text;
     const uri = request.params.textDocument.uri;
     await this.#analyzer.initConfigs(uri);
     this.#analyzer.updateContent(uri, text);
-    this.#diagnosticsResponse(request);
+    return this.#diagnosticsResponse(request);
   }
 
-  handleChange(request) {
+  changeResponse(request) {
     const text = request.params.contentChanges[0].text;
     const uri = request.params.textDocument.uri;
     this.#analyzer.updateContent(uri, text);
-    this.#diagnosticsResponse(request);
+    return this.#diagnosticsResponse(request);
   }
 
-  handleSave(request) {
-    this.#diagnosticsResponse(request);
+  saveResponse(request) {
+    return this.#diagnosticsResponse(request);
   }
 
-  handleClose(request) {
+  closeResponse(request) {
     const uri = request.params.textDocument.uri;
     this.#analyzer.remove(uri);
   }
@@ -36,34 +36,29 @@ export default class Protocol {
   #diagnosticsResponse(request) {
     const uri = request.params.textDocument.uri;
     const diagnostics = this.#analyzer.generateDiagnostics(uri);
-    const response = {
+    return {
       id: request.id,
       method: "textDocument/publishDiagnostics",
       params: { uri, diagnostics },
     };
-
-    this.#respond(response);
   }
 
-  handleCompletion(request) {
-    const response = { id: request.id, result: completions };
-    this.#respond(response);
+  complectionResponse(request) {
+    return { id: request.id, result: completions };
   }
 
-  handleCodeAction(request) {
+  codeActionResponse(request) {
     const uri = request.params.textDocument.uri;
     const range = request.params.range;
     const diagnostics = request.params.context.diagnostics;
     const actions = this.#analyzer.generateCodeActions(uri, range, diagnostics);
-    const response = {
+    return {
       id: request.id,
       result: actions.length > 0 ? actions : null,
     };
-
-    this.#respond(response);
   }
 
-  handleInitialization(request) {
+  initializationResponse(request) {
     const initalizeResponse = {
       capabilities: {
         codeActionProvider: true,
@@ -73,12 +68,10 @@ export default class Protocol {
       serverInfo: { name: "toplsp", version: "1.0" },
     };
 
-    const response = {
+    return {
       id: request.id,
       result: initalizeResponse,
     };
-
-    this.#respond(response);
   }
 
   #respond(response) {
