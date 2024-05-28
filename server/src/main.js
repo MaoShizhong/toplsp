@@ -4,7 +4,7 @@ import Protocol from "./Protocol.js";
 
 const encoder = new Encoder();
 const analyzer = new Analyzer();
-const protocol = new Protocol(analyzer, encoder);
+const protocol = new Protocol(analyzer);
 
 process.stdin.on("data", (data) => {
   try {

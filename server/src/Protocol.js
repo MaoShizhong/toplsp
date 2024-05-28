@@ -2,11 +2,9 @@ import completions from "./completions/index.js";
 
 export default class Protocol {
   #analyzer;
-  #encoder;
 
-  constructor(analyzer, encoder, logger) {
+  constructor(analyzer) {
     this.#analyzer = analyzer;
-    this.#encoder = encoder;
   }
 
   async openResponse(request) {
