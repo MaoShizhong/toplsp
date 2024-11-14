@@ -33,7 +33,8 @@ export default class MarkdownConfig {
       this.#initProjectConfig(options, configDirectory);
       this.#initLessonConfig(options, configDirectory);
     } catch (_) {
-      return;
+      // Exit process when config for curriculum were not found
+      process.exit(0);
     }
   }
 
