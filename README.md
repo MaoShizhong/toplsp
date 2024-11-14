@@ -15,12 +15,14 @@ TOP LSP Can be found in the marketplace of VSCode.
    Make sure to replace `rootPath` with the real path of the directory.
 
 ```lua
-local client = vim.lsp.start_client({
-  name = "toplsp",
-  cmd = { "node", "rootPath/toplsp/server/out/main.js" },
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'markdown',
+  callback = function(ev)
+    vim.lsp.start {
+      name = 'toplsp',
+      cmd = { 'node', '/home/mclilzee/repo/toplsp/server/out/main.js' },
+      root_dir = vim.fs.root(ev.buf, { 'project.markdownlint-cli2.jsonc', 'lesson.markdownlint-cli2.jsonc' }),
+    }
+  end,
 })
-
-if not client then
-  return
-end
 ```
