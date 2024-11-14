@@ -6,3 +6,8 @@
 
 - Cache config initialization for better performance
 - Remove logger
+
+## 1.1.2
+
+- Exit process when config were not found
+- Update icon to use svg
