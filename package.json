@@ -19,7 +19,7 @@
     "install-dependencies": "npm install && cd client && npm install && cd ../server && npm install && cd .."
   },
   "devDependencies": {
-    "esbuild": "^0.20.2"
+    "esbuild": "^0.24"
   },
   "main": "./client/out/extension.js",
   "activationEvents": [
