@@ -1,5 +1,5 @@
 import { parse } from "jsonc-parser";
-import { fileURLToPath } from "url";
+import { fileURLToPath, pathToFileURL } from "url";
 import path from "path";
 import fs from "fs";
 
@@ -32,7 +32,7 @@ export default class MarkdownConfig {
     const baseConfig = fs.readFileSync(paths.base).toString();;
     const options = parse(baseConfig);
     const rulePromises = options.customRules.map(
-      (r) => import(configDirectory + r.slice(2)),
+      (r) => import(path.join(paths.fileUrl, r)),
     );
 
     const customRules = await Promise.all(rulePromises);
@@ -58,7 +58,6 @@ export default class MarkdownConfig {
 
   #getConfigFiles(uri) {
     let dir = path.dirname(fileURLToPath(uri));
-    console.error("First dir", dir);
     while (fs.existsSync(dir)) {
       const baseConfig = path.join(dir, BASE_CONFIG_FILE);
 
@@ -67,7 +66,14 @@ export default class MarkdownConfig {
         const projectConfig = path.join(dir, PROJECT_CONFIG_FILE);
 
         if (fs.existsSync(lessonConfig) && fs.existsSync(projectConfig)) {
-          return {base: baseConfig, lesson: lessonConfig, project: projectConfig};
+          const paths = {
+            fileUrl: pathToFileURL(dir).href,
+            base: baseConfig,
+            lesson: lessonConfig,
+            project: projectConfig
+          };
+
+          return paths;
         }
       }
 
