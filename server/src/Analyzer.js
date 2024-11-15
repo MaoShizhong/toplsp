@@ -36,8 +36,12 @@ export default class Analyzer {
   }
 
   generateCodeActions(uri, range, diagnostics) {
-    return this.#document
-      .get(uri)
+    const document = this.#document.get(uri);
+    if (!document || !document.results) {
+      return [];
+    }
+
+    return document
       .results.filter((r) => this.#validActionResult(r, range))
       .map((r) => new CodeAction(r, uri, diagnostics));
   }
