@@ -11,3 +11,7 @@
 
 - Exit process when config were not found
 - Update icon to use svg
+
+## 1.1.3
+
+- Fix crashing bug when being opened in different workspaces
