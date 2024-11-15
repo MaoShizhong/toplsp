@@ -24,7 +24,8 @@
   "main": "./client/out/extension.js",
   "activationEvents": [
     "onLanguage:markdown",
-    "workspaceContains:**/curriculum/.markdownlint-cli2.jsonc"
+    "workspaceContains:**/curriculum/project.markdownlint-cli2.jsonc",
+    "workspaceContains:**/curriculum/lesson.markdownlint-cli2.jsonc"
   ],
   "engines": {
     "vscode": "^1.8.0"
