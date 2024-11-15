@@ -1,5 +1,11 @@
 import { parse } from "jsonc-parser";
+import { fileURLToPath } from "url";
+import path from "path";
 import fs from "fs";
+
+const BASE_CONFIG_FILE = ".markdownlint-cli2.jsonc";
+const LESSON_CONFIG_FILE = "lesson.markdownlint-cli2.jsonc";
+const PROJECT_CONFIG_FILE = "project.markdownlint-cli2.jsonc";
 
 export default class MarkdownConfig {
   #projectConfig;
@@ -17,33 +23,23 @@ export default class MarkdownConfig {
     if (this.#projectConfig && this.#lessonConfig) {
       return;
     }
-    // Wrap in try catch incase not working from TOP directory, exit gracefuly
-    try {
-      const configDirectory = this.#getConfigDirectory(uri);
-      const baseConfig = this.#readBaseConfig(configDirectory);
 
-      const options = parse(baseConfig);
-      const rulePromises = options.customRules.map(
-        (r) => import(configDirectory + r.slice(2)),
-      );
-
-      const customRules = await Promise.all(rulePromises);
-      options.customRules = customRules.map((rule) => rule.default);
-
-      this.#initProjectConfig(options, configDirectory);
-      this.#initLessonConfig(options, configDirectory);
-    } catch (_) {
+    const paths = this.#getConfigFiles(uri)
+    if (paths == null) {
+      return;
     }
-  }
 
-  #initProjectConfig(options, configDirectory) {
-    const path = `${configDirectory}project.markdownlint-cli2.jsonc`;
-    this.#projectConfig = this.#mergeConfig(options, path);
-  }
+    const baseConfig = fs.readFileSync(paths.base).toString();;
+    const options = parse(baseConfig);
+    const rulePromises = options.customRules.map(
+      (r) => import(configDirectory + r.slice(2)),
+    );
 
-  #initLessonConfig(options, configDirectory) {
-    const path = `${configDirectory}lesson.markdownlint-cli2.jsonc`;
-    this.#lessonConfig = this.#mergeConfig(options, path);
+    const customRules = await Promise.all(rulePromises);
+    options.customRules = customRules.map((rule) => rule.default);
+
+    this.#lessonConfig = this.#mergeConfig(options, paths.lesson);
+    this.#projectConfig = this.#mergeConfig(options, paths.project);
   }
 
   #mergeConfig(options, path) {
@@ -60,17 +56,29 @@ export default class MarkdownConfig {
     return mergedConfig;
   }
 
-  #readBaseConfig(configDirectory) {
-    const path = `${configDirectory}.markdownlint-cli2.jsonc`;
-    return fs.readFileSync(path).toString();
-  }
+  #getConfigFiles(uri) {
+    let dir = path.dirname(fileURLToPath(uri));
+    console.error("First dir", dir);
+    while (fs.existsSync(dir)) {
+      const baseConfig = path.join(dir, BASE_CONFIG_FILE);
 
-  #getConfigDirectory(uri) {
-    let startIndex = 0;
-    if (uri.startsWith("file://")) {
-      startIndex = "file://".length;
+      if (fs.existsSync(baseConfig)) {
+        const lessonConfig = path.join(dir, LESSON_CONFIG_FILE);
+        const projectConfig = path.join(dir, PROJECT_CONFIG_FILE);
+
+        if (fs.existsSync(lessonConfig) && fs.existsSync(projectConfig)) {
+          return {base: baseConfig, lesson: lessonConfig, project: projectConfig};
+        }
+      }
+
+      const newDir = path.dirname(dir);
+      if (dir === newDir) {
+        return null;
+      }
+
+      dir = newDir;
     }
-    const endIndex = uri.indexOf("curriculum/");
-    return uri.slice(startIndex, endIndex + "curriculum/".length);
+
+    return null;
   }
 }
