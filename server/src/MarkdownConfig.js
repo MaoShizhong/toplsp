@@ -12,7 +12,8 @@ export default class MarkdownConfig {
   #lessonConfig;
 
   getOptions(uri) {
-    if (uri.includes("project_")) {
+    const fileName = path.basename(uri);
+    if (fileName.startsWith("project_") || fileName.startsWith("project-")) {
       return this.#projectConfig;
     } else {
       return this.#lessonConfig;
@@ -24,12 +25,12 @@ export default class MarkdownConfig {
       return;
     }
 
-    const paths = this.#getConfigFiles(uri)
+    const paths = this.#getConfigFiles(uri);
     if (paths == null) {
       return;
     }
 
-    const baseConfig = fs.readFileSync(paths.base).toString();;
+    const baseConfig = fs.readFileSync(paths.base).toString();
     const options = parse(baseConfig);
     const rulePromises = options.customRules.map(
       (r) => import(path.join(paths.fileUrl, r)),
@@ -70,7 +71,7 @@ export default class MarkdownConfig {
             fileUrl: pathToFileURL(dir).href,
             base: baseConfig,
             lesson: lessonConfig,
-            project: projectConfig
+            project: projectConfig,
           };
 
           return paths;
