@@ -13,7 +13,7 @@ export default class MarkdownConfig {
 
   getOptions(uri) {
     const fileName = path.basename(uri);
-    if (fileName.startsWith("project_") || fileName.startsWith("project:")) {
+    if (fileName.startsWith("project_") || fileName.startsWith("project-")) {
       return this.#projectConfig;
     } else {
       return this.#lessonConfig;
